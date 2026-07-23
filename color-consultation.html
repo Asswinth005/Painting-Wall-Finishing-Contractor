@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Consult · Brush &amp; Roll – Premium Finishes</title>
+  
+  <!-- Custom Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='28' y='42' width='48' height='30' rx='6' fill='%23D4A373'/%3E%3Crect x='38' y='18' width='10' height='30' fill='%231E1E20'/%3E%3Ccircle cx='68' cy='58' r='12' fill='%23D4A373'/%3E%3C/svg%3E" />
+  
+  <!-- Tailwind CSS via Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            luxury: {
+              ivory: '#FAF9F6',
+              clay: '#F4F1DE',
+              charcoal: '#1E1E20',
+              obsidian: '#0B0B0C',
+              gold: '#D4A373',
+              'gold-hover': '#C59564',
+              'gold-light': '#F3E9DC',
+              terracotta: '#E76F51',
+              sage: '#81B29A',
+              slate: '#2E4057',
+              bronze: '#B58D5F',
+              border: '#E9E4DB',
+              'dark-bg': '#121214',
+              'dark-card': '#1C1C1E',
+              'dark-border': '#28282B',
+              'dark-text': '#E5E5E7'
+            }
+          },
+          fontFamily: {
+            display: ['"Poppins"', 'system-ui', 'sans-serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'float-slow': 'floatSlow 8s ease-in-out infinite',
+            'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+          },
+          keyframes: {
+            floatSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            slideUp: { '0%': { transform: 'translateY(40px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            pulseSoft: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.7' } },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background-color: #FAF9F6;
+      color: #1E1E20;
+      font-family: 'Inter', sans-serif;
+    }
+    .dark body {
+      background-color: #121214;
+      color: #E5E5E7;
+    }
+
+    .pattern-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.15;
+    }
+    .dark .pattern-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      opacity: 0.04;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: #1E1E20;
+      transition: color 0.2s ease;
+    }
+    .dark .nav-link {
+      color: #E5E5E7;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #D4A373 !important;
+    }
+
+    .dropdown-school { position: relative; }
+    .dropdown-school-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 0.5rem 0;
+      box-shadow: 0 18px 32px rgba(0,0,0,0.06);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      border: 1px solid #E9E4DB;
+    }
+    .dark .dropdown-school-menu {
+      background: #1C1C1E;
+      border-color: #28282B;
+    }
+    .dropdown-school:hover .dropdown-school-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+      color: #1E1E20;
+    }
+    .dark .dropdown-item { color: #E5E5E7; }
+    .dropdown-item:hover {
+      background: #F4F1DE;
+      color: #0B0B0C;
+      padding-left: 1.7rem;
+    }
+    .dropdown-item i { margin-right: 0.75rem; width: 20px; }
+
+    .mobile-menu-school {
+      background: #FFFFFF;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 0 0 24px 24px;
+    }
+    .dark .mobile-menu-school {
+      background: #1C1C1E;
+    }
+    .mobile-menu-school.open {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    [dir="rtl"] .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+    [dir="rtl"] .mr-auto { margin-right: 0 !important; margin-left: auto !important; }
+    [dir="rtl"] .border-l-2 { border-left-width: 0 !important; border-right-width: 2px !important; }
+    [dir="rtl"] .pl-6 { padding-left: 0 !important; padding-right: 1.5rem !important; }
+
+    .btn-gold {
+      background: #D4A373;
+      color: #1E1E20;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3);
+    }
+    .btn-gold:hover {
+      background: #C59564;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 163, 115, 0.4);
+      color: #0B0B0C;
+    }
+    .dark .btn-gold {
+      background: #D4A373;
+      color: #0B0B0C;
+    }
+    .dark .btn-gold:hover {
+      background: #C59564;
+      color: #0B0B0C;
+    }
+
+    .social-icon-school {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #F4F1DE;
+      color: #1E1E20;
+      transition: all 0.3s;
+    }
+    .social-icon-school:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+      transform: translateY(-3px);
+    }
+    .dark .social-icon-school {
+      background: #28282B;
+      color: #E5E5E7;
+    }
+    .dark .social-icon-school:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+    }
+
+    .hero-bg-pattern {
+      background: linear-gradient(to bottom, rgba(250, 249, 246, 0.72), rgba(250, 249, 246, 0.93)), url('assets/new_consult.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .dark .hero-bg-pattern {
+      background: linear-gradient(to bottom, rgba(18, 18, 20, 0.75), rgba(18, 18, 20, 0.95)), url('assets/new_consult.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .bg-gold-dots-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.12;
+    }
+    .dark .bg-gold-dots-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+    }
+
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.08) 0%, rgba(250, 249, 246, 0) 60%);
+    }
+    .dark .hero-overlay {
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.12) 0%, rgba(18, 18, 20, 0) 60%);
+    }
+
+    .mobile-active {
+      border-left: 3px solid #D4A373;
+      border-radius: 0 12px 12px 0 !important;
+      padding-left: 0.75rem !important;
+      color: #D4A373 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Color Consult specific */
+    .color-swatch {
+      width: 100%;
+      height: 80px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 3px solid transparent;
+      position: relative;
+    }
+    .color-swatch:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .color-swatch.active {
+      border-color: #D4A373;
+      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.3);
+    }
+    .color-swatch .check {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: #D4A373;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #1E1E20;
+      font-size: 0.75rem;
+    }
+    .color-swatch.active .check {
+      display: flex;
+    }
+    .color-psych-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid #E9E4DB;
+      transition: all 0.3s ease;
+    }
+    .dark .color-psych-card {
+      background: #1C1C1E;
+      border-color: #28282B;
+    }
+    .color-psych-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(212, 163, 115, 0.1);
+      border-color: #D4A373;
+    }
+    .consult-card {
+      background: #FFFFFF;
+      border-radius: 32px;
+      transition: all 0.3s ease;
+      border: 1px solid #E9E4DB;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .dark .consult-card {
+      background: #1C1C1E;
+      border-color: #28282B;
+    }
+    .consult-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(212, 163, 115, 0.15);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen relative">
+  <div class="absolute inset-0 pattern-light pointer-events-none z-0"></div>
+
+  <!-- ======== NAVIGATION (IDENTICAL) ======== -->
+  <nav class="fixed top-6 left-6 right-6 z-50 bg-white/95 dark:bg-[#1C1C1E]/95 border border-neutral-200/50 dark:border-neutral-800/50 rounded-3xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.08)] px-8 py-3 transition-all duration-300">
+    <div class="flex items-center justify-between w-full">
+      <a class="flex items-center gap-3 group shrink-0" href='index.html'>
+        <div class="w-11 h-11 bg-neutral-900 dark:bg-luxury-gold rounded-full flex items-center justify-center shadow-md transition duration-300">
+          <i class="fas fa-paint-roller text-white dark:text-neutral-900 text-sm md:text-base"></i>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-base md:text-lg font-sans font-black tracking-tight text-neutral-900 dark:text-white leading-none">BRUSH<span class="text-luxury-gold font-semibold">&amp;ROLL</span></span>
+          <span class="text-[8px] md:text-[9px] tracking-[0.25em] font-extrabold text-luxury-gold uppercase mt-1.5 leading-none">Wall finishing</span>
+        </div>
+      </a>
+      
+      <div class="hidden xl:flex items-center gap-6 xl:gap-8">
+        <div class="dropdown-school">
+          <button class="nav-link text-sm font-semibold transition flex items-center gap-1 py-1 whitespace-nowrap focus:outline-none">
+            Home <i class="fas fa-chevron-down text-[9px] opacity-60 ml-1"></i>
+          </button>
+          <div class="dropdown-school-menu">
+            <a class="dropdown-item font-medium text-xs" href="index.html">Home 1</a>
+            <a class="dropdown-item font-medium text-xs" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="about.html">About</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="services.html">Services</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="gallery.html">Gallery</a>
+        <a class="nav-link active text-sm font-medium transition whitespace-nowrap" href="color-consultation.html">Color Consult</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="quote.html">Free Quote</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="contact.html">Contact</a>
+      </div>
+      
+      <div class="hidden xl:flex items-center gap-4">
+        <div class="h-6 w-[1px] bg-neutral-200 dark:bg-neutral-800 self-center"></div>
+        <div class="flex items-center gap-3">
+          <div id="auth-buttons" class="flex items-center gap-3">
+            <a href="login.html" class="px-5 py-2 border border-neutral-300 dark:border-neutral-700 rounded-full text-xs font-semibold text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">Sign In</a>
+            <a href="register.html" class="px-5 py-2 bg-luxury-gold hover:bg-luxury-gold-hover text-neutral-950 font-bold rounded-full text-xs transition">Sign Up</a>
+          </div>
+          <div id="user-profile-menu" class="hidden relative">
+            <button id="user-menu-btn" class="w-10 h-10 rounded-full bg-luxury-gold text-neutral-950 font-bold flex items-center justify-center border border-luxury-border shadow-sm hover:scale-105 transition">
+              <span id="user-initials">U</span>
+            </button>
+            <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-[#1C1C1E] border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-2xl shadow-xl py-2 hidden z-50">
+              <div class="px-4 py-2 border-b border-luxury-border/60 dark:border-luxury-dark-border/60">
+                <p class="text-[10px] text-luxury-bronze">Logged in as</p>
+                <p id="user-display-name" class="text-xs font-bold truncate text-neutral-950 dark:text-luxury-ivory">User Name</p>
+              </div>
+              <a href="client.html" class="block px-4 py-2 text-xs text-luxury-charcoal dark:text-luxury-dark-text hover:bg-luxury-gold/10 hover:text-luxury-gold transition"><i class="fas fa-th-large mr-2"></i> Dashboard</a>
+              <a href="#" class="block px-4 py-2 text-xs text-luxury-charcoal dark:text-luxury-dark-text hover:bg-luxury-gold/10 hover:text-luxury-gold transition"><i class="fas fa-sliders-h mr-2"></i> Settings</a>
+              <hr class="my-1 border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <button id="logout-btn" class="w-full text-left px-4 py-2 text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition"><i class="fas fa-sign-out-alt mr-2"></i> Log Out</button>
+            </div>
+          </div>
+          <button id="theme-toggle" class="w-10 h-10 rounded-full bg-[#F5EFEB] dark:bg-neutral-800 text-luxury-gold hover:scale-105 transition flex items-center justify-center focus:outline-none">
+            <i class="fas fa-moon dark:hidden text-sm"></i>
+            <i class="fas fa-sun hidden dark:inline text-sm"></i>
+          </button>
+          <button id="rtl-toggle" class="w-10 h-10 rounded-full bg-[#F5EFEB] dark:bg-neutral-800 text-luxury-gold hover:scale-105 transition flex items-center justify-center text-sm focus:outline-none">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+        </div>
+      </div>
+      
+      <button id="mobile-toggle" class="xl:hidden w-10 h-10 rounded-full bg-luxury-gold text-neutral-950 flex items-center justify-center shadow-md">
+        <i class="fas fa-bars text-base"></i>
+      </button>
+    </div>
+    
+    <div id="mobile-menu" class="mobile-menu-school xl:hidden">
+      <div class="py-4 px-3 space-y-1">
+        <div class="space-y-1">
+          <button onclick="document.getElementById('mobile-home-submenu').classList.toggle('hidden'); document.getElementById('mobile-home-chevron').classList.toggle('rotate-180');" class="w-full text-left flex justify-between items-center py-3 px-4 font-medium hover:bg-neutral-50 transition dark:hover:bg-neutral-800">
+            Home <i id="mobile-home-chevron" class="fas fa-chevron-down text-xs opacity-60 transition-transform"></i>
+          </button>
+          <div id="mobile-home-submenu" class="hidden pl-6 space-y-1">
+            <a class="block py-2 px-4 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl" href="index.html">Home 1</a>
+            <a class="block py-2 px-4 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="about.html">About</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="services.html">Services</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="gallery.html">Gallery</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800 mobile-active" href="color-consultation.html">Color Consult</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="quote.html">Free Quote</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="contact.html">Contact</a>
+        <div class="flex flex-col gap-3 pt-5 mt-3 border-t border-neutral-200 dark:border-neutral-800">
+          <div id="mobile-auth-buttons" class="flex flex-col gap-2">
+            <a href="login.html" class="text-center py-2.5 rounded-full font-semibold border border-neutral-300 text-neutral-700 dark:text-white dark:border-neutral-700">Sign In</a>
+            <a href="register.html" class="text-center py-2.5 rounded-full font-semibold bg-luxury-gold text-neutral-950">Sign Up</a>
+          </div>
+          <div id="mobile-user-info" class="hidden flex flex-col gap-2">
+            <div class="flex items-center gap-3 px-4 py-2 bg-[#F3E9DC] dark:bg-luxury-dark-card rounded-2xl">
+              <div class="w-9 h-9 rounded-full bg-luxury-gold text-neutral-950 font-bold flex items-center justify-center shrink-0">
+                <span id="mobile-user-initials">U</span>
+              </div>
+              <div class="min-w-0">
+                <div id="mobile-user-name" class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-xs truncate">Client Name</div>
+                <div class="text-[9px] text-luxury-bronze">Logged in</div>
+              </div>
+            </div>
+            <a class="text-center py-2 rounded-full text-xs font-semibold bg-luxury-charcoal text-luxury-ivory dark:bg-luxury-ivory dark:text-luxury-obsidian" href="client.html">Go to Dashboard</a>
+            <button id="mobile-logout-btn" class="text-center py-2 rounded-full text-xs font-semibold text-red-500 border border-red-200 dark:border-red-950/20 hover:bg-red-50 dark:hover:bg-red-950/20">Log Out</button>
+          </div>
+          <div class="flex gap-3">
+            <button id="mobile-theme-toggle" class="flex-1 py-2 rounded-full bg-[#F3E9DC] dark:bg-neutral-800 text-luxury-gold text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i> Theme
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 py-2 rounded-full bg-[#F3E9DC] dark:bg-neutral-800 text-luxury-gold text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-exchange-alt"></i> RTL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======== COLOR CONSULT HERO ======== -->
+  <section class="min-h-[50vh] flex items-center pt-36 pb-16 relative overflow-hidden hero-bg-pattern">
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center animate-slide-up">
+        <span class="inline-block bg-[#D4A373] text-[#1E1E20] px-5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5">
+          <i class="fas fa-palette mr-1"></i> Color Consultation
+        </span>
+        <h1 class="text-5xl md:text-6xl xl:text-7xl font-display font-bold text-luxury-charcoal dark:text-luxury-ivory leading-[1.05]">
+          Discover Your <span class="text-luxury-gold">Perfect</span><br />
+          <span class="text-3xl md:text-4xl xl:text-5xl font-light">Color Palette</span>
+        </h1>
+        <p class="text-lg text-luxury-charcoal/70 dark:text-luxury-dark-text/70 max-w-2xl mx-auto mt-6 leading-relaxed">
+          Expert guidance to help you select the perfect colors for your space, considering lighting, architecture, and your personal style.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== COLOR PSYCHOLOGY SECTION ======== -->
+  <section class="py-16 bg-[#F4F1DE] dark:bg-[#1C1C1E] border-y border-luxury-border/60 dark:border-luxury-dark-border/60 relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-12">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-brain mr-1"></i> Color Psychology
+        </span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          The <span class="text-[#D4A373]">Emotion</span> of Color
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-3 text-sm">
+          Colors influence mood, perception, and energy. Here's what different hues can do for your space.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div class="color-psych-card">
+          <div class="w-12 h-12 rounded-full bg-[#D4A373] mb-3"></div>
+          <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Warm Gold</h4>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Evokes luxury, sophistication, and warmth. Ideal for living rooms, dining areas, and spaces where you want to feel cozy and elegant.
+          </p>
+        </div>
+        <div class="color-psych-card">
+          <div class="w-12 h-12 rounded-full bg-[#81B29A] mb-3"></div>
+          <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Sage Green</h4>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Promotes calm, balance, and connection to nature. Perfect for bedrooms, bathrooms, and spaces meant for relaxation.
+          </p>
+        </div>
+        <div class="color-psych-card">
+          <div class="w-12 h-12 rounded-full bg-[#2E4057] mb-3"></div>
+          <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Regal Navy</h4>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Conveys depth, reliability, and sophistication. Excellent for studies, home offices, and accent walls.
+          </p>
+        </div>
+        <div class="color-psych-card">
+          <div class="w-12 h-12 rounded-full bg-[#E76F51] mb-3"></div>
+          <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Terracotta</h4>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Brings energy, warmth, and earthiness. Great for feature walls, kitchens, and creative spaces.
+          </p>
+        </div>
+        <div class="color-psych-card">
+          <div class="w-12 h-12 rounded-full bg-[#FAF9F6] border border-luxury-border dark:border-luxury-dark-border mb-3"></div>
+          <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Ivory</h4>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Creates a sense of space, purity, and light. Perfect for small rooms, hallways, and modern minimalist interiors.
+          </p>
+        </div>
+        <div class="color-psych-card">
+          <div class="w-12 h-12 rounded-full bg-[#1E1E20] mb-3"></div>
+          <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Charcoal</h4>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Represents elegance, professionalism, and stability. Excellent for accent walls, media rooms, and contemporary spaces.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== INTERACTIVE COLOR SELECTOR ======== -->
+  <section class="py-20 bg-[#FAF9F6] dark:bg-[#121214] relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-14">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-hand-pointer mr-1"></i> Try It Yourself
+        </span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          Color <span class="text-[#D4A373]">Visualizer</span> Studio
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-3 text-sm">
+          Click on a color swatch to see how it transforms the room. Experience the power of color before you commit.
+        </p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-white dark:bg-luxury-dark-card rounded-3xl p-6 md:p-8 shadow-xl border border-luxury-border/60 dark:border-luxury-dark-border/60">
+          <!-- Room preview SVG -->
+          <div class="relative bg-[#F4F1DE] dark:bg-[#2A2A2A] rounded-2xl overflow-hidden mb-6">
+            <svg viewBox="0 0 800 500" class="w-full h-auto" id="visualizer-svg">
+              <!-- Floor -->
+              <rect x="0" y="380" width="800" height="120" fill="#E2DDD5" class="dark:fill-[#222225] transition-colors duration-500" />
+              
+              <!-- Back Wall (main target) -->
+              <rect id="visualizer-wall" x="0" y="0" width="800" height="380" fill="#D4A373" class="transition-all duration-700 ease-out" />
+              
+              <!-- Shadow effects -->
+              <rect x="0" y="0" width="800" height="20" fill="url(#ceil-shadow)" opacity="0.3" />
+              <rect x="0" y="0" width="40" height="380" fill="url(#left-shade)" opacity="0.25" />
+              <rect x="0" y="375" width="800" height="5" fill="#000000" opacity="0.12" />
+              <rect x="0" y="365" width="800" height="15" fill="#FAF9F6" class="dark:fill-[#121214]" />
+              
+              <!-- Art Frame -->
+              <rect x="120" y="55" width="200" height="210" fill="#1E1E20" rx="4" />
+              <rect x="130" y="65" width="180" height="190" fill="#FAF9F6" />
+              <circle cx="220" cy="150" r="45" fill="#D4A373" opacity="0.8" />
+              <path d="M150 220 C 180 180, 220 220, 290 170 C 270 240, 180 240, 150 220 Z" fill="#E76F51" opacity="0.6" />
+              
+              <!-- Couch -->
+              <path d="M300 320 C300 270, 320 250, 360 250 L640 250 C680 250, 700 270, 700 320 L700 370 L300 370 Z" fill="#1C1C1E" class="dark:fill-luxury-ivory transition-colors duration-500" />
+              <rect x="320" y="340" width="360" height="30" fill="#121214" class="dark:fill-luxury-border transition-colors duration-500" rx="5" />
+              <rect x="340" y="300" width="155" height="42" fill="#2E2E30" class="dark:fill-luxury-border transition-colors duration-500" rx="8" />
+              <rect x="505" y="300" width="155" height="42" fill="#2E2E30" class="dark:fill-luxury-border transition-colors duration-500" rx="8" />
+              <rect x="315" y="270" width="60" height="60" fill="#D4A373" rx="12" transform="rotate(-12 315 270)" />
+              <rect x="625" y="270" width="60" height="60" fill="#81B29A" rx="12" transform="rotate(18 625 270)" />
+              
+              <!-- Plant -->
+              <rect x="60" y="305" width="45" height="65" fill="#B58D5F" rx="3" />
+              <path d="M82 305 C60 260, 20 280, 30 250 C40 220, 80 265, 82 305 Z" fill="#81B29A" />
+              <path d="M82 305 C110 260, 140 280, 130 250 C120 220, 85 265, 82 305 Z" fill="#5F937D" />
+              
+              <!-- Defs -->
+              <defs>
+                <linearGradient id="ceil-shadow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#000" />
+                  <stop offset="100%" stop-color="#000" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="left-shade" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#000" />
+                  <stop offset="100%" stop-color="#000" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          
+          <!-- Color swatches -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm font-semibold text-luxury-charcoal dark:text-luxury-ivory">Select a Color:</span>
+              <span class="text-xs font-mono text-luxury-gold" id="selected-color-name">Champagne Gold</span>
+            </div>
+            <div class="grid grid-cols-6 gap-3">
+              <div class="color-swatch active" data-color="#D4A373" data-name="Champagne Gold" onclick="changeWallColor('#D4A373', 'Champagne Gold')" style="background: #D4A373;">
+                <div class="check"><i class="fas fa-check"></i></div>
+              </div>
+              <div class="color-swatch" data-color="#E76F51" data-name="Terracotta" onclick="changeWallColor('#E76F51', 'Terracotta')" style="background: #E76F51;">
+                <div class="check"><i class="fas fa-check"></i></div>
+              </div>
+              <div class="color-swatch" data-color="#81B29A" data-name="Sage Green" onclick="changeWallColor('#81B29A', 'Sage Green')" style="background: #81B29A;">
+                <div class="check"><i class="fas fa-check"></i></div>
+              </div>
+              <div class="color-swatch" data-color="#2E4057" data-name="Regal Navy" onclick="changeWallColor('#2E4057', 'Regal Navy')" style="background: #2E4057;">
+                <div class="check"><i class="fas fa-check"></i></div>
+              </div>
+              <div class="color-swatch" data-color="#FAF9F6" data-name="Ivory" onclick="changeWallColor('#FAF9F6', 'Ivory')" style="background: #FAF9F6; border-color: #E9E4DB;">
+                <div class="check"><i class="fas fa-check"></i></div>
+              </div>
+              <div class="color-swatch" data-color="#1E1E20" data-name="Charcoal" onclick="changeWallColor('#1E1E20', 'Charcoal')" style="background: #1E1E20;">
+                <div class="check"><i class="fas fa-check"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SIGNATURE PALETTE IDEAS ======== -->
+  <section class="py-20 bg-white dark:bg-[#121214] border-b border-luxury-border/60 dark:border-luxury-dark-border/60 relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none opacity-40"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-[#1E1E20] dark:text-white leading-tight">
+          Signature <span class="text-[#D4A373]">Palette Ideas</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Palette 1: Warm Organic Sand -->
+        <div class="bg-[#FAF9F6] dark:bg-[#1C1C1E] border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] p-8 shadow-md hover:shadow-lg transition-all duration-300">
+          <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory mb-5">Warm Organic Sand</h4>
+          <div class="flex gap-3 mb-6">
+            <!-- Swatch 1 -->
+            <div class="flex-1 h-14 rounded-2xl border border-neutral-200 dark:border-neutral-800" style="background-color: #FAF9F6;" title="Ivory (#FAF9F6)"></div>
+            <!-- Swatch 2 -->
+            <div class="flex-1 h-14 rounded-2xl" style="background-color: #F3E9DC;" title="Champagne Light (#F3E9DC)"></div>
+            <!-- Swatch 3 -->
+            <div class="flex-1 h-14 rounded-2xl" style="background-color: #D4A373;" title="Champagne Gold (#D4A373)"></div>
+            <!-- Swatch 4 -->
+            <div class="flex-1 h-14 rounded-2xl" style="background-color: #E76F51;" title="Terracotta (#E76F51)"></div>
+          </div>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 leading-relaxed">
+            Ideal for living rooms and bedrooms seeking a cozy, earthy, and mineral-inspired atmosphere.
+          </p>
+        </div>
+
+        <!-- Palette 2: Modern Sophisticated Sage -->
+        <div class="bg-[#FAF9F6] dark:bg-[#1C1C1E] border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] p-8 shadow-md hover:shadow-lg transition-all duration-300">
+          <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory mb-5">Modern Sophisticated Sage</h4>
+          <div class="flex gap-3 mb-6">
+            <!-- Swatch 1 -->
+            <div class="flex-1 h-14 rounded-2xl border border-neutral-200 dark:border-neutral-800" style="background-color: #FAF9F6;" title="Ivory (#FAF9F6)"></div>
+            <!-- Swatch 2 -->
+            <div class="flex-1 h-14 rounded-2xl" style="background-color: #81B29A;" title="Sage Green (#81B29A)"></div>
+            <!-- Swatch 3 -->
+            <div class="flex-1 h-14 rounded-2xl" style="background-color: #2E4057;" title="Regal Navy (#2E4057)"></div>
+            <!-- Swatch 4 -->
+            <div class="flex-1 h-14 rounded-2xl" style="background-color: #1E1E20;" title="Charcoal (#1E1E20)"></div>
+          </div>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 leading-relaxed">
+            Perfect for home offices, kitchens, and modern open layout concepts seeking calm focus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CONSULTATION OPTIONS ======== -->
+  <section class="py-20 bg-[#F4F1DE] dark:bg-[#1C1C1E] border-y border-luxury-border/60 dark:border-luxury-dark-border/60 relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-14">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-comments mr-1"></i> How It Works
+        </span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          Your <span class="text-[#D4A373]">Consultation</span> Options
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-3 text-sm">
+          Choose the consultation type that best fits your needs and schedule.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="consult-card p-8 text-center">
+          <div class="w-16 h-16 mx-auto bg-[#F3E9DC] dark:bg-[#2E2A24] rounded-2xl flex items-center justify-center text-3xl text-luxury-gold mb-4">
+            <i class="fas fa-video"></i>
+          </div>
+          <h4 class="text-xl font-bold text-luxury-charcoal dark:text-luxury-ivory">Virtual Consult</h4>
+          <p class="text-sm text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Connect with our color expert from anywhere. Share photos of your space and get personalized recommendations.
+          </p>
+          <ul class="text-left text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-4 space-y-2">
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> 30-minute video call</li>
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> Digital mood boards</li>
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> Color palette recommendations</li>
+          </ul>
+          <a href="#book" class="inline-block mt-auto pt-6 text-sm font-bold text-luxury-gold hover:text-luxury-gold-hover transition">Book Now <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+        
+        <div class="consult-card p-8 text-center border-2 border-luxury-gold relative">
+          <div class="w-16 h-16 mx-auto bg-[#D4A373] dark:bg-[#9B7248] rounded-2xl flex items-center justify-center text-3xl text-white dark:text-luxury-charcoal mb-4">
+            <i class="fas fa-home"></i>
+          </div>
+          <h4 class="text-xl font-bold text-luxury-charcoal dark:text-luxury-ivory">In-Home Visit</h4>
+          <p class="text-sm text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Our color consultant visits your space to assess lighting, architecture, and provide hands-on recommendations.
+          </p>
+          <ul class="text-left text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-4 space-y-2">
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> 60-minute on-site visit</li>
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> Physical sample boards</li>
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> Lighting assessment</li>
+          </ul>
+          <a href="#book" class="inline-block mt-auto pt-6 text-sm font-bold text-luxury-gold hover:text-luxury-gold-hover transition">Book Now <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+        
+        <div class="consult-card p-8 text-center">
+          <div class="w-16 h-16 mx-auto bg-[#F3E9DC] dark:bg-[#2E2A24] rounded-2xl flex items-center justify-center text-3xl text-luxury-gold mb-4">
+            <i class="fas fa-phone"></i>
+          </div>
+          <h4 class="text-xl font-bold text-luxury-charcoal dark:text-luxury-ivory">Express Consult</h4>
+          <p class="text-sm text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-2 leading-relaxed">
+            Quick 15-minute phone consultation for specific color questions or to get started on your project.
+          </p>
+          <ul class="text-left text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-4 space-y-2">
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> 15-minute phone call</li>
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> Quick color guidance</li>
+            <li class="flex items-center gap-2"><i class="fas fa-check text-luxury-gold"></i> Next steps planning</li>
+          </ul>
+          <a href="#book" class="inline-block mt-auto pt-6 text-sm font-bold text-luxury-gold hover:text-luxury-gold-hover transition">Book Now <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== BOOK CONSULTATION FORM ======== -->
+  <section id="book" class="py-20 bg-[#FAF9F6] dark:bg-[#121214] relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-calendar-plus mr-1"></i> Book Now
+        </span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          Schedule Your <span class="text-[#D4A373]">Consultation</span>
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-3 text-sm">
+          Fill out the form below and we'll reach out to confirm your consultation details.
+        </p>
+      </div>
+      
+      <div class="max-w-2xl mx-auto bg-white dark:bg-luxury-dark-card rounded-3xl p-8 shadow-xl border border-luxury-border/60 dark:border-luxury-dark-border/60">
+        <form class="space-y-5">
+          <div class="grid md:grid-cols-2 gap-4">
+            <input type="text" placeholder="Full name" required class="w-full px-4 py-3 rounded-xl border border-luxury-border/60 dark:border-luxury-dark-border/60 bg-luxury-ivory dark:bg-luxury-dark-bg text-luxury-charcoal dark:text-luxury-dark-text focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition">
+            <input type="email" placeholder="Email address" required class="w-full px-4 py-3 rounded-xl border border-luxury-border/60 dark:border-luxury-dark-border/60 bg-luxury-ivory dark:bg-luxury-dark-bg text-luxury-charcoal dark:text-luxury-dark-text focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition">
+          </div>
+          <input type="tel" placeholder="Phone number" class="w-full px-4 py-3 rounded-xl border border-luxury-border/60 dark:border-luxury-dark-border/60 bg-luxury-ivory dark:bg-luxury-dark-bg text-luxury-charcoal dark:text-luxury-dark-text focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition">
+          <select required class="w-full px-4 py-3 rounded-xl border border-luxury-border/60 dark:border-luxury-dark-border/60 bg-luxury-ivory dark:bg-luxury-dark-bg text-luxury-charcoal dark:text-luxury-dark-text focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition">
+            <option value="">Select consultation type</option>
+            <option>Virtual Consult (30 min video call)</option>
+            <option>In-Home Visit (60 min on-site)</option>
+            <option>Express Consult (15 min phone call)</option>
+          </select>
+          <textarea rows="4" placeholder="Tell us about your project, space, and what you're looking for…" class="w-full px-4 py-3 rounded-xl border border-luxury-border/60 dark:border-luxury-dark-border/60 bg-luxury-ivory dark:bg-luxury-dark-bg text-luxury-charcoal dark:text-luxury-dark-text focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition"></textarea>
+          <button type="submit" class="w-full btn-gold py-4 rounded-full text-base font-bold">
+            <i class="fas fa-calendar-check mr-2"></i> Schedule Consultation
+          </button>
+        </form>
+        <p class="text-center text-xs text-luxury-charcoal/40 dark:text-luxury-dark-text/40 mt-4">
+          <i class="fas fa-lock mr-1"></i> Your information is secure. We'll respond within 24 hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FOOTER (IDENTICAL) ======== -->
+  <footer class="bg-white dark:bg-[#121214] text-neutral-800 dark:text-[#E5E5E7] pt-16 pb-8 border-t border-[#E9E4DB] dark:border-[#28282B]">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div class="text-center md:text-start">
+          <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+            <div class="w-11 h-11 bg-neutral-900 dark:bg-[#D4A373] rounded-full flex items-center justify-center shadow-md shrink-0">
+              <i class="fas fa-paint-roller text-white dark:text-neutral-900 text-sm md:text-base"></i>
+            </div>
+            <div class="flex flex-col text-left">
+              <span class="text-base md:text-lg font-sans font-black tracking-tight text-neutral-900 dark:text-white leading-none">BRUSH<span class="text-[#D4A373] font-semibold">&amp;ROLL</span></span>
+              <span class="text-[8px] md:text-[9px] tracking-[0.25em] font-extrabold text-[#D4A373] uppercase mt-1.5 leading-none">Wall finishing</span>
+            </div>
+          </div>
+          <p class="mb-5 text-neutral-500 dark:text-[#B58D5F] text-sm">Premium painting & wall finishing. Craftsmanship you can see.</p>
+          <div class="flex justify-center md:justify-start gap-3">
+            <a href="#" class="social-icon-school"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon-school"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon-school"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="text-center md:text-start">
+          <h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Explore</h4>
+          <ul class="space-y-2">
+            <li><a href="services.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Services</a></li>
+            <li><a href="gallery.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Gallery</a></li>
+            <li><a href="color-consultation.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Color Consult</a></li>
+          </ul>
+        </div>
+        <div class="text-center md:text-start">
+          <h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">About</a></li>
+            <li><a href="#" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Careers</a></li>
+            <li><a href="contact.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Contact</a></li>
+          </ul>
+        </div>
+        <div class="text-center md:text-start">
+          <h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Studio</h4>
+          <ul class="space-y-3">
+            <li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]">
+              <i class="fas fa-map-marker-alt text-[#D4A373] mt-1"></i><span>12 Paint St, Color City</span>
+            </li>
+            <li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]">
+              <i class="fas fa-phone text-[#D4A373]"></i><span>(555) 987-6543</span>
+            </li>
+            <li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]">
+              <i class="fas fa-envelope text-[#D4A373]"></i><span>artisan@brushandroll.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-[#E9E4DB] dark:border-[#28282B] text-center text-sm text-neutral-500 dark:text-[#B58D5F]">
+        <p>&copy; 2026 BRUSH &amp; ROLL · Painting & Wall Finishing. <i class="fas fa-heart text-[#D4A373] mx-1"></i> Transforming spaces.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== SCRIPTS ======== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme toggles
+      const themeBtns = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+      themeBtns.forEach(btn => {
+        btn?.addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+      });
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+
+      // RTL
+      function setRTL(isRTL) {
+        const html = document.documentElement;
+        if (isRTL === 'rtl' || isRTL === true) {
+          html.setAttribute('dir', 'rtl');
+          localStorage.setItem('dir', 'rtl');
+        } else {
+          html.setAttribute('dir', 'ltr');
+          localStorage.setItem('dir', 'ltr');
+        }
+      }
+      const savedDir = localStorage.getItem('dir');
+      if (savedDir === 'rtl') document.documentElement.setAttribute('dir', 'rtl');
+      
+      const rtlBtn = document.getElementById('rtl-toggle');
+      if (rtlBtn) {
+        rtlBtn.addEventListener('click', () => {
+          const currentDir = document.documentElement.getAttribute('dir');
+          setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        });
+      }
+      const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+      if (mobileRtlBtn) {
+        mobileRtlBtn.addEventListener('click', () => {
+          const currentDir = document.documentElement.getAttribute('dir');
+          setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        });
+      }
+
+      // Mobile Menu
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('open');
+          const icon = mobileToggle.querySelector('i');
+          if (mobileMenu.classList.contains('open')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden';
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = '';
+          }
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+            document.body.style.overflow = '';
+          });
+        });
+      }
+
+      // User Session
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const authButtons = document.getElementById('auth-buttons');
+      const userProfileMenu = document.getElementById('user-profile-menu');
+      const userInitials = document.getElementById('user-initials');
+      const userDisplayName = document.getElementById('user-display-name');
+      const mobileAuthButtons = document.getElementById('mobile-auth-buttons');
+      const mobileUserInfo = document.getElementById('mobile-user-info');
+      const mobileUserInitials = document.getElementById('mobile-user-initials');
+      const mobileUserName = document.getElementById('mobile-user-name');
+      
+      // Always show sign in/up buttons and hide profile menu
+      if (authButtons) authButtons.classList.remove('hidden');
+      if (userProfileMenu) userProfileMenu.classList.add('hidden');
+      if (mobileAuthButtons) mobileAuthButtons.classList.remove('hidden');
+      if (mobileUserInfo) mobileUserInfo.classList.add('hidden');
+
+      const userMenuBtn = document.getElementById('user-menu-btn');
+      const userDropdown = document.getElementById('user-dropdown');
+      if (userMenuBtn && userDropdown) {
+        userMenuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          userDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => {
+          userDropdown.classList.add('hidden');
+        });
+      }
+
+      const handleLogout = () => {
+        localStorage.removeItem('currentUser');
+        window.location.reload();
+      };
+      document.getElementById('logout-btn')?.addEventListener('click', handleLogout);
+      document.getElementById('mobile-logout-btn')?.addEventListener('click', handleLogout);
+
+      // Color Visualizer
+      window.changeWallColor = function(color, name) {
+        const wall = document.getElementById('visualizer-wall');
+        const nameLabel = document.getElementById('selected-color-name');
+        if (wall) wall.setAttribute('fill', color);
+        if (nameLabel) nameLabel.innerText = name;
+        
+        // Update active state on swatches
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+          swatch.classList.remove('active');
+        });
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+          if (swatch.dataset.color === color) {
+            swatch.classList.add('active');
+          }
+        });
+      };
+    });
+  </script>
+</body>
+</html>

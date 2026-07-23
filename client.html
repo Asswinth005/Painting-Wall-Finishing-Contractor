@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brush &amp; Roll &middot; Premium Painting &amp; Wall Finishes</title>
+  
+  <!-- Custom Favicon (paint roller) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='28' y='42' width='48' height='30' rx='6' fill='%23D4A373'/%3E%3Crect x='38' y='18' width='10' height='30' fill='%231E1E20'/%3E%3Ccircle cx='68' cy='58' r='12' fill='%23D4A373'/%3E%3C/svg%3E" />
+  
+  <!-- Tailwind CSS via Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            luxury: {
+              ivory: '#FAF9F6',
+              clay: '#F4F1DE',
+              charcoal: '#1E1E20',
+              obsidian: '#0B0B0C',
+              gold: '#D4A373',
+              'gold-hover': '#C59564',
+              'gold-light': '#F3E9DC',
+              terracotta: '#E76F51',
+              sage: '#81B29A',
+              slate: '#2E4057',
+              bronze: '#B58D5F',
+              border: '#E9E4DB',
+              
+              // Dark mode tokens
+              'dark-bg': '#121214',
+              'dark-card': '#1C1C1E',
+              'dark-border': '#28282B',
+              'dark-text': '#E5E5E7'
+            }
+          },
+          fontFamily: {
+            display: ['"Poppins"', 'system-ui', 'sans-serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif'],
+            serif: ['"Poppins"', 'system-ui', 'sans-serif'],
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'float-slow': 'floatSlow 8s ease-in-out infinite',
+            'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+          },
+          keyframes: {
+            floatSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            slideUp: { '0%': { transform: 'translateY(40px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            pulseSoft: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.7' } },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background-color: #FAF9F6;
+      color: #1E1E20;
+      font-family: 'Inter', sans-serif;
+    }
+    .dark body {
+      background-color: #121214;
+      color: #E5E5E7;
+    }
+
+    .pattern-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.15;
+    }
+    .dark .pattern-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      opacity: 0.04;
+    }
+
+    /* Navigation */
+    .nav-link {
+      font-weight: 500;
+      color: #1E1E20;
+      transition: color 0.2s ease;
+    }
+    .dark .nav-link {
+      color: #E5E5E7;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #D4A373 !important;
+    }
+
+    /* Dropdown */
+    .dropdown-school { position: relative; }
+    .dropdown-school-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 0.5rem 0;
+      box-shadow: 0 18px 32px rgba(0,0,0,0.06);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      border: 1px solid #E9E4DB;
+    }
+    .dark .dropdown-school-menu {
+      background: #1C1C1E;
+      border-color: #28282B;
+    }
+    .dropdown-school:hover .dropdown-school-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+      color: #1E1E20;
+    }
+    .dark .dropdown-item { color: #E5E5E7; }
+    .dropdown-item:hover {
+      background: #F4F1DE;
+      color: #0B0B0C;
+      padding-left: 1.7rem;
+    }
+    .dropdown-item i { margin-right: 0.75rem; width: 20px; }
+
+    /* Mobile menu */
+    .mobile-menu-school {
+      background: #FFFFFF;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 0 0 24px 24px;
+    }
+    .dark .mobile-menu-school {
+      background: #1C1C1E;
+    }
+    .mobile-menu-school.open {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    [dir="rtl"] .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+    [dir="rtl"] .mr-auto { margin-right: 0 !important; margin-left: auto !important; }
+    [dir="rtl"] .border-l-2 { border-left-width: 0 !important; border-right-width: 2px !important; }
+    [dir="rtl"] .pl-6 { padding-left: 0 !important; padding-right: 1.5rem !important; }
+    [dir="rtl"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+
+    /* Cards */
+    .card-finish {
+      background: #FFFFFF;
+      border-radius: 28px;
+      transition: all 0.3s ease;
+      border: 1px solid #E9E4DB;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    }
+    .dark .card-finish {
+      background: #1C1C1E;
+      border-color: #28282B;
+    }
+    .card-finish:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -10px rgba(212, 163, 115, 0.2);
+      border-color: #D4A373;
+    }
+    
+    /* Buttons */
+    .btn-gold {
+      background: #D4A373;
+      color: #1E1E20;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3);
+    }
+    .btn-gold:hover {
+      background: #C59564;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 163, 115, 0.4);
+      color: #0B0B0C;
+    }
+    .dark .btn-gold {
+      background: #D4A373;
+      color: #0B0B0C;
+    }
+    .dark .btn-gold:hover {
+      background: #C59564;
+      color: #0B0B0C;
+    }
+    
+    .btn-outline-gold {
+      border: 1.5px solid #D4A373;
+      color: #D4A373;
+      background: transparent;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .btn-outline-gold:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+      transform: translateY(-2px);
+    }
+
+    /* Social icons */
+    .social-icon-school {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #F4F1DE;
+      color: #1E1E20;
+      transition: all 0.3s;
+    }
+    .social-icon-school:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+      transform: translateY(-3px);
+    }
+    .dark .social-icon-school {
+      background: #28282B;
+      color: #E5E5E7;
+    }
+    .dark .social-icon-school:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+    }
+    
+    /* Hero background pattern */
+    .hero-bg-pattern {
+      background: linear-gradient(to bottom, rgba(250, 249, 246, 0.72), rgba(250, 249, 246, 0.93)), url('assets/after_regal_navy.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .dark .hero-bg-pattern {
+      background: linear-gradient(to bottom, rgba(18, 18, 20, 0.75), rgba(18, 18, 20, 0.95)), url('assets/after_regal_navy.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .bg-gold-dots-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.12;
+    }
+    .dark .bg-gold-dots-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+    }
+    
+    /* Hero overlay */
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.08) 0%, rgba(250, 249, 246, 0) 60%);
+    }
+    .dark .hero-overlay {
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.12) 0%, rgba(18, 18, 20, 0) 60%);
+    }
+    
+    /* Testimonial */
+    .testimonial-card {
+      background: #FFFFFF;
+      border-radius: 28px;
+      padding: 2rem;
+      border-left: 6px solid #D4A373;
+    }
+    .dark .testimonial-card {
+      background: #1C1C1E;
+    }
+    
+    /* Gallery */
+    .gallery-grid img {
+      transition: transform 0.5s ease;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+    }
+    
+    /* Quote form */
+    .quote-form input,
+    .quote-form textarea,
+    .quote-form select {
+      background: #FAF9F6;
+      border: 1px solid #E9E4DB;
+      border-radius: 16px;
+      padding: 0.9rem 1.2rem;
+      width: 100%;
+      color: #1E1E20;
+      transition: all 0.2s;
+    }
+    .dark .quote-form input,
+    .dark .quote-form textarea,
+    .dark .quote-form select {
+      background: #1C1C1E;
+      border-color: #28282B;
+      color: #E5E5E7;
+    }
+    .quote-form input:focus,
+    .quote-form textarea:focus {
+      outline: none;
+      border-color: #D4A373;
+      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+    }
+    .dark .quote-form input:focus,
+    .dark .quote-form textarea:focus {
+      border-color: #D4A373;
+      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+    }
+    .mobile-active {
+      border-left: 3px solid #D4A373;
+      border-radius: 0 12px 12px 0 !important;
+      padding-left: 0.75rem !important;
+      color: #D4A373 !important;
+      font-weight: 700 !important;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen relative">
+  <div class="absolute inset-0 pattern-light pointer-events-none z-0"></div>
+
+  <!-- ======== FLOATING NAVIGATION (LIGHTLY CURVED) ======== -->
+  <nav class="fixed top-6 left-6 right-6 z-50 bg-white/95 dark:bg-[#1C1C1E]/95 border border-neutral-200/50 dark:border-neutral-800/50 rounded-3xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.08)] px-8 py-3 transition-all duration-300">
+    <div class="flex items-center justify-between w-full">
+      <!-- Logo -->
+      <a class="flex items-center gap-3 group shrink-0" href='index.html'>
+        <div class="w-11 h-11 bg-neutral-900 dark:bg-luxury-gold rounded-full flex items-center justify-center shadow-md transition duration-300">
+          <i class="fas fa-paint-roller text-white dark:text-neutral-900 text-sm md:text-base"></i>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-base md:text-lg font-sans font-black tracking-tight text-neutral-900 dark:text-white leading-none">BRUSH<span class="text-luxury-gold font-semibold">&amp;ROLL</span></span>
+          <span class="text-[8px] md:text-[9px] tracking-[0.25em] font-extrabold text-luxury-gold uppercase mt-1.5 leading-none">Wall finishing</span>
+        </div>
+      </a>
+      
+      <!-- Desktop nav links -->
+      <div class="hidden xl:flex items-center gap-6 xl:gap-8">
+        <!-- Home Dropdown -->
+        <div class="dropdown-school">
+          <button class="nav-link text-sm font-medium transition flex items-center gap-1 py-1 whitespace-nowrap focus:outline-none">
+            Home <i class="fas fa-chevron-down text-[9px] opacity-60 ml-1"></i>
+          </button>
+          <div class="dropdown-school-menu">
+            <a class="dropdown-item font-medium text-xs" href="index.html">Home 1</a>
+            <a class="dropdown-item font-medium text-xs" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="about.html">About</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="services.html">Services</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="gallery.html">Gallery</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="color-consultation.html">Color Consult</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="quote.html">Free Quote</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="contact.html">Contact</a>
+      </div>
+      
+      <!-- Desktop actions -->
+      <div class="hidden xl:flex items-center gap-4">
+        <!-- Vertical Divider -->
+        <div class="h-6 w-[1px] bg-neutral-200 dark:bg-neutral-800 self-center"></div>
+        
+        <div class="flex items-center gap-3">
+          <div id="auth-buttons" class="flex items-center gap-3">
+            <a href="login.html" class="px-5 py-2 border border-neutral-300 dark:border-neutral-700 rounded-full text-xs font-semibold text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+              Sign In
+            </a>
+            <a href="register.html" class="px-5 py-2 bg-luxury-gold hover:bg-luxury-gold-hover text-neutral-950 font-bold rounded-full text-xs transition">
+              Sign Up
+            </a>
+          </div>
+          
+          <!-- Logged In User Dropdown -->
+          <div id="user-profile-menu" class="hidden relative">
+            <button id="user-menu-btn" class="w-10 h-10 rounded-full bg-luxury-gold text-neutral-950 font-bold flex items-center justify-center border border-luxury-border shadow-sm hover:scale-105 transition">
+              <span id="user-initials">U</span>
+            </button>
+            <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-[#1C1C1E] border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-2xl shadow-xl py-2 hidden z-50">
+              <div class="px-4 py-2 border-b border-luxury-border/60 dark:border-luxury-dark-border/60">
+                <p class="text-[10px] text-luxury-bronze">Logged in as</p>
+                <p id="user-display-name" class="text-xs font-bold truncate text-neutral-950 dark:text-luxury-ivory">User Name</p>
+              </div>
+              <a href="client.html" class="block px-4 py-2 text-xs text-luxury-charcoal dark:text-luxury-dark-text hover:bg-luxury-gold/10 hover:text-luxury-gold transition">
+                <i class="fas fa-th-large mr-2"></i> Dashboard
+              </a>
+              <a href="#" class="block px-4 py-2 text-xs text-luxury-charcoal dark:text-luxury-dark-text hover:bg-luxury-gold/10 hover:text-luxury-gold transition">
+                <i class="fas fa-sliders-h mr-2"></i> Settings
+              </a>
+              <hr class="my-1 border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <button id="logout-btn" class="w-full text-left px-4 py-2 text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition">
+                <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+              </button>
+            </div>
+          </div>
+          
+          <!-- Toggles inside cream circular background -->
+          <button id="theme-toggle" class="w-10 h-10 rounded-full bg-[#F5EFEB] dark:bg-neutral-800 text-luxury-gold hover:scale-105 transition flex items-center justify-center focus:outline-none">
+            <i class="fas fa-moon dark:hidden text-sm"></i>
+            <i class="fas fa-sun hidden dark:inline text-sm"></i>
+          </button>
+          
+          <button id="rtl-toggle" class="w-10 h-10 rounded-full bg-[#F5EFEB] dark:bg-neutral-800 text-luxury-gold hover:scale-105 transition flex items-center justify-center text-sm focus:outline-none">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile toggle -->
+      <button id="mobile-toggle" class="xl:hidden w-10 h-10 rounded-full bg-luxury-gold text-neutral-950 flex items-center justify-center shadow-md">
+        <i class="fas fa-bars text-base"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu-school xl:hidden">
+      <div class="py-4 px-3 space-y-1">
+        <!-- Collapsible mobile Home -->
+        <div class="space-y-1">
+          <button onclick="document.getElementById('mobile-home-submenu').classList.toggle('hidden'); document.getElementById('mobile-home-chevron').classList.toggle('rotate-180');" class="w-full text-left flex justify-between items-center py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800">
+            Home <i id="mobile-home-chevron" class="fas fa-chevron-down text-xs opacity-60 transition-transform"></i>
+          </button>
+          <div id="mobile-home-submenu" class="hidden pl-6 space-y-1">
+            <a class="block py-2 px-4 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl" href="index.html">Home 1</a>
+            <a class="block py-2 px-4 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl" href="index.html">Home 2</a>
+          </div>
+        </div>
+        
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="about.html">About</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="services.html">Services</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="gallery.html">Gallery</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="color-consultation.html">Color Consult</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="quote.html">Free Quote</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="contact.html">Contact</a>
+        
+        <div class="flex flex-col gap-3 pt-5 mt-3 border-t border-neutral-200 dark:border-neutral-800">
+          <div id="mobile-auth-buttons" class="flex flex-col gap-2">
+            <a href="login.html" class="text-center py-2.5 rounded-full font-semibold border border-neutral-300 text-neutral-700 dark:text-white dark:border-neutral-700">Sign In</a>
+            <a href="register.html" class="text-center py-2.5 rounded-full font-semibold bg-luxury-gold text-neutral-950">Sign Up</a>
+          </div>
+          
+          <div id="mobile-user-info" class="hidden flex flex-col gap-2">
+            <div class="flex items-center gap-3 px-4 py-2 bg-[#F3E9DC] dark:bg-luxury-dark-card rounded-2xl">
+              <div class="w-9 h-9 rounded-full bg-luxury-gold text-neutral-950 font-bold flex items-center justify-center shrink-0">
+                <span id="mobile-user-initials">U</span>
+              </div>
+              <div class="min-w-0">
+                <div id="mobile-user-name" class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-xs truncate">Client Name</div>
+                <div class="text-[9px] text-luxury-bronze">Logged in</div>
+              </div>
+            </div>
+            <a class="text-center py-2 rounded-full text-xs font-semibold bg-luxury-charcoal text-luxury-ivory dark:bg-luxury-ivory dark:text-luxury-obsidian" href="client.html">Go to Dashboard</a>
+            <button id="mobile-logout-btn" class="text-center py-2 rounded-full text-xs font-semibold text-red-500 border border-red-200 dark:border-red-950/20 hover:bg-red-50 dark:hover:bg-red-950/20">Log Out</button>
+          </div>
+
+          <div class="flex gap-3">
+            <button id="mobile-theme-toggle" class="flex-1 py-2 rounded-full bg-[#F3E9DC] dark:bg-neutral-800 text-luxury-gold text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i> Theme
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 py-2 rounded-full bg-[#F3E9DC] dark:bg-neutral-800 text-luxury-gold text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-exchange-alt"></i> RTL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======== DASHBOARD ======== -->
+  <section class="min-h-screen pt-36 pb-20 bg-luxury-ivory dark:bg-[#121214] relative">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none opacity-20"></div>
+    <div class="container mx-auto px-6 relative z-10 max-w-5xl">
+      <!-- Welcome Panel -->
+      <div class="bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-3xl p-8 shadow-md mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <span class="text-xs font-bold text-luxury-gold uppercase tracking-wider">Client Portal</span>
+          <h1 class="text-3xl font-display font-bold text-luxury-charcoal dark:text-luxury-ivory mt-1">
+            Welcome back, <span id="client-name-display" class="text-luxury-gold">Client</span>!
+          </h1>
+          <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Here is the latest status of your active paint project.</p>
+        </div>
+        <a href="quote.html" class="btn-gold px-6 py-2.5 rounded-full text-xs font-bold shrink-0">
+          <i class="fas fa-plus mr-1"></i> New Request
+        </a>
+      </div>
+      
+      <!-- Project Status & details -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Tracker -->
+        <div class="md:col-span-2 space-y-6">
+          <!-- Active Project Card -->
+          <div class="bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-3xl p-6 shadow-sm">
+            <h4 class="font-bold text-lg text-luxury-charcoal dark:text-luxury-ivory mb-6">Active Project Status: Living Room Finish</h4>
+            
+            <!-- Timeline steps -->
+            <div class="space-y-6 relative pl-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-luxury-border dark:before:bg-luxury-dark-border">
+              <!-- Step 1 -->
+              <div class="relative flex gap-4">
+                <div class="absolute -left-[20px] w-[10px] h-[10px] rounded-full bg-green-500 ring-4 ring-green-100 dark:ring-green-950/20"></div>
+                <div>
+                  <h5 class="text-xs font-bold text-luxury-charcoal dark:text-luxury-ivory">Color Consultation</h5>
+                  <p class="text-[10px] text-green-500 font-semibold">Completed on July 10, 2026</p>
+                </div>
+              </div>
+              <!-- Step 2 -->
+              <div class="relative flex gap-4">
+                <div class="absolute -left-[20px] w-[10px] h-[10px] rounded-full bg-luxury-gold ring-4 ring-luxury-gold/20 animate-pulse"></div>
+                <div>
+                  <h5 class="text-xs font-bold text-luxury-charcoal dark:text-luxury-ivory">Surface & Trim Preparation</h5>
+                  <p class="text-[10px] text-luxury-gold font-semibold">In Progress — Patching & Sanding</p>
+                </div>
+              </div>
+              <!-- Step 3 -->
+              <div class="relative flex gap-4">
+                <div class="absolute -left-[20px] w-[10px] h-[10px] rounded-full bg-neutral-300 dark:bg-neutral-800"></div>
+                <div>
+                  <h5 class="text-xs font-bold text-luxury-charcoal/50 dark:text-luxury-dark-text/40">Wall Painting & Texturing</h5>
+                  <p class="text-[10px] text-neutral-400">Scheduled for July 24, 2026</p>
+                </div>
+              </div>
+              <!-- Step 4 -->
+              <div class="relative flex gap-4">
+                <div class="absolute -left-[20px] w-[10px] h-[10px] rounded-full bg-neutral-300 dark:bg-neutral-800"></div>
+                <div>
+                  <h5 class="text-xs font-bold text-luxury-charcoal/50 dark:text-luxury-dark-text/40">Final Cleanup & Walkthrough</h5>
+                  <p class="text-[10px] text-neutral-400">Pending project completion</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sidebar Info -->
+        <div class="space-y-6">
+          <!-- Quote Summary -->
+          <div class="bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-3xl p-6 shadow-sm">
+            <h4 class="font-bold text-sm text-luxury-charcoal dark:text-luxury-ivory mb-4">Estimates & Invoices</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60">Estimated Cost:</span>
+                <strong class="text-luxury-charcoal dark:text-luxury-ivory">$2,450.00</strong>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60">Amount Paid:</span>
+                <strong class="text-green-500">$735.00 (Deposit)</strong>
+              </div>
+              <div class="flex justify-between items-center text-xs pt-3 border-t border-luxury-border/60 dark:border-luxury-dark-border/60">
+                <span class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60">Balance Due:</span>
+                <strong class="text-luxury-charcoal dark:text-luxury-ivory">$1,715.00</strong>
+              </div>
+            </div>
+            
+            <a href="#" class="block w-full text-center mt-6 py-2 border border-luxury-gold text-luxury-gold rounded-full text-xs font-bold hover:bg-luxury-gold hover:text-neutral-950 transition">
+              Download Invoice PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Direct access protection
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (!currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+      
+      const clientNameDisplay = document.getElementById('client-name-display');
+      if (clientNameDisplay) {
+        clientNameDisplay.innerText = currentUser.name;
+      }
+    });
+  </script>
+
+<!-- ======== FOOTER ======== -->
+  <footer class="bg-white dark:bg-[#121214] text-neutral-800 dark:text-[#E5E5E7] pt-16 pb-8 border-t border-[#E9E4DB] dark:border-[#28282B]">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div class="text-center md:text-start"><div class="flex items-center justify-center md:justify-start gap-3 mb-6"><div class="w-11 h-11 bg-neutral-900 dark:bg-[#D4A373] rounded-full flex items-center justify-center shadow-md shrink-0"><i class="fas fa-paint-roller text-white dark:text-neutral-900 text-sm md:text-base"></i></div><div class="flex flex-col text-left"><span class="text-base md:text-lg font-sans font-black tracking-tight text-neutral-900 dark:text-white leading-none">BRUSH<span class="text-[#D4A373] font-semibold">&amp;ROLL</span></span><span class="text-[8px] md:text-[9px] tracking-[0.25em] font-extrabold text-[#D4A373] uppercase mt-1.5 leading-none">Wall finishing</span></div></div><p class="mb-5 text-neutral-500 dark:text-[#B58D5F] text-sm">Premium painting & wall finishing. Craftsmanship you can see.</p><div class="flex justify-center md:justify-start gap-3"><a href="#" class="social-icon-school"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon-school"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-icon-school"><i class="fab fa-youtube"></i></a></div></div>
+        <div class="text-center md:text-start"><h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Explore</h4><ul class="space-y-2"><li><a href="#services" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Services</a></li><li><a href="#gallery" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Gallery</a></li><li><a href="quote.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Free Quote</a></li></ul></div>
+        <div class="text-center md:text-start"><h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Company</h4><ul class="space-y-2"><li><a href="#" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">About</a></li><li><a href="#" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Careers</a></li><li><a href="#" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Contact</a></li></ul></div>
+        <div class="text-center md:text-start"><h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Studio</h4><ul class="space-y-3"><li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]"><i class="fas fa-map-marker-alt text-[#D4A373] mt-1"></i><span>12 Paint St, Color City</span></li><li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]"><i class="fas fa-phone text-[#D4A373]"></i><span>(555) 987-6543</span></li><li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]"><i class="fas fa-envelope text-[#D4A373]"></i><span>artisan@brushandroll.com</span></li></ul></div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-[#E9E4DB] dark:border-[#28282B] text-center text-sm text-neutral-500 dark:text-[#B58D5F]"><p>&copy; 2026 BRUSH &amp; ROLL · Painting & Wall Finishing. <i class="fas fa-heart text-[#D4A373] mx-1"></i> Transforming spaces.</p></div>
+    </div>
+  </footer>
+
+  <!-- ======== SCRIPTS LOGIC ======== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme toggles
+      const themeBtns = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+      themeBtns.forEach(btn => {
+        btn?.addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+      });
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      
+      // RTL
+      function setRTL(isRTL) {
+        const html = document.documentElement;
+        if (isRTL === 'rtl' || isRTL === true) {
+          html.setAttribute('dir', 'rtl');
+          localStorage.setItem('dir', 'rtl');
+        } else {
+          html.setAttribute('dir', 'ltr');
+          localStorage.setItem('dir', 'ltr');
+        }
+      }
+      const savedDir = localStorage.getItem('dir');
+      if (savedDir === 'rtl') {
+        document.documentElement.setAttribute('dir', 'rtl');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+      }
+      
+      const rtlBtn = document.getElementById('rtl-toggle');
+      if (rtlBtn) {
+        rtlBtn.addEventListener('click', () => {
+          const currentDir = document.documentElement.getAttribute('dir');
+          setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        });
+      }
+      const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+      if (mobileRtlBtn) {
+        mobileRtlBtn.addEventListener('click', () => {
+          const currentDir = document.documentElement.getAttribute('dir');
+          setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        });
+      }
+
+      // Mobile Menu Toggle
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('open');
+          const icon = mobileToggle.querySelector('i');
+          if (mobileMenu.classList.contains('open')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden';
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = '';
+          }
+        });
+
+        // Close menu and restore scroll when clicking any link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+            document.body.style.overflow = '';
+          });
+        });
+      }
+
+      // User Session & initials setup
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const authButtons = document.getElementById('auth-buttons');
+      const userProfileMenu = document.getElementById('user-profile-menu');
+      const userInitials = document.getElementById('user-initials');
+      const userDisplayName = document.getElementById('user-display-name');
+      
+      const mobileAuthButtons = document.getElementById('mobile-auth-buttons');
+      const mobileUserInfo = document.getElementById('mobile-user-info');
+      const mobileUserInitials = document.getElementById('mobile-user-initials');
+      const mobileUserName = document.getElementById('mobile-user-name');
+      
+      // Always show sign in/up buttons and hide profile menu
+      if (authButtons) authButtons.classList.remove('hidden');
+      if (userProfileMenu) userProfileMenu.classList.add('hidden');
+      if (mobileAuthButtons) mobileAuthButtons.classList.remove('hidden');
+      if (mobileUserInfo) mobileUserInfo.classList.add('hidden');
+
+      // Profile dropdown menu button
+      const userMenuBtn = document.getElementById('user-menu-btn');
+      const userDropdown = document.getElementById('user-dropdown');
+      if (userMenuBtn && userDropdown) {
+        userMenuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          userDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => {
+          userDropdown.classList.add('hidden');
+        });
+      }
+
+      // Log out handler
+      const handleLogout = () => {
+        localStorage.removeItem('currentUser');
+        window.location.reload();
+      };
+      const logoutBtn = document.getElementById('logout-btn');
+      const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+      if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+      if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', handleLogout);
+
+      // Paint Estimator Logic
+      calculateProject();
+    });
+
+    // Color visualizer room paint change
+    function changeWallColor(hexColor, name, description, textColor) {
+      const wall = document.getElementById('visualizer-wall');
+      const codeLabel = document.getElementById('swatch-code');
+      const nameLabel = document.getElementById('swatch-name');
+      const descLabel = document.getElementById('swatch-desc');
+      
+      if (wall) wall.setAttribute('fill', hexColor);
+      if (codeLabel) codeLabel.innerText = hexColor;
+      if (nameLabel) nameLabel.innerText = name;
+      if (descLabel) descLabel.innerText = `"${description}"`;
+      
+      // Update active border style on colors list
+      const buttons = document.querySelectorAll('#visualizer-svg + div + p + div button, div.space-y-4 button');
+      buttons.forEach(btn => {
+        if (btn.title === name) {
+          btn.classList.add('border-luxury-gold', 'ring-2', 'ring-luxury-gold/30');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-luxury-gold', 'ring-2', 'ring-luxury-gold/30');
+          btn.classList.add('border-transparent');
+        }
+      });
+    }
+
+    // Calculator global state
+    let activeProjectType = 'interior';
+    
+    function setProjectType(type) {
+      activeProjectType = type;
+      
+      const btnInterior = document.getElementById('btn-type-interior');
+      const btnExterior = document.getElementById('btn-type-exterior');
+      const btnAccent = document.getElementById('btn-type-accent');
+      
+      const unselectedClass = ['py-2.5', 'rounded-xl', 'border', 'border-luxury-border', 'dark:border-luxury-dark-border', 'text-luxury-charcoal', 'dark:text-luxury-dark-text', 'text-xs', 'font-semibold', 'hover:border-luxury-gold', 'transition', 'focus:outline-none'];
+      const selectedClass = ['py-2.5', 'rounded-xl', 'border-2', 'border-luxury-gold', 'bg-luxury-gold/10', 'text-luxury-gold', 'text-xs', 'font-bold', 'transition', 'focus:outline-none'];
+      
+      [btnInterior, btnExterior, btnAccent].forEach(btn => {
+        btn.className = '';
+        btn.classList.add(...unselectedClass);
+      });
+      
+      let targetBtn = btnInterior;
+      if (type === 'exterior') targetBtn = btnExterior;
+      if (type === 'accent') targetBtn = btnAccent;
+      
+      targetBtn.className = '';
+      targetBtn.classList.add(...selectedClass);
+      
+      calculateProject();
+    }
+    
+    function calculateProject() {
+      const areaRange = document.getElementById('calc-area-range');
+      const areaLabel = document.getElementById('calc-area-label');
+      const gradeSelect = document.getElementById('calc-grade');
+      
+      const priceLabel = document.getElementById('calc-price');
+      const durationLabel = document.getElementById('calc-duration');
+      const gallonsLabel = document.getElementById('calc-gallons');
+      
+      if (!areaRange || !areaLabel || !gradeSelect) return;
+      
+      const area = parseInt(areaRange.value);
+      areaLabel.innerText = `${area} sq. ft.`;
+      
+      // Base variables
+      let pricePerSqFt = 1.8; // default interior
+      let speedSqFtPerDay = 400; 
+      let coveragePerGallon = 350; // standard paint coverage
+      
+      if (activeProjectType === 'exterior') {
+        pricePerSqFt = 2.4;
+        speedSqFtPerDay = 300;
+      } else if (activeProjectType === 'accent') {
+        pricePerSqFt = 3.0; // high precision, alignment prep
+        speedSqFtPerDay = 150;
+      }
+      
+      // Quality grade multiplier
+      const grade = gradeSelect.value;
+      let multiplier = 1.0;
+      if (grade === 'premium') {
+        multiplier = 1.25;
+      } else if (grade === 'luxury') {
+        multiplier = 2.5; // Venetian plasters or high end paints
+      }
+      
+      // Calculate
+      const rawCost = area * pricePerSqFt * multiplier;
+      const minCost = Math.round(rawCost * 0.9);
+      const maxCost = Math.round(rawCost * 1.1);
+      
+      const rawDuration = area / (speedSqFtPerDay / multiplier);
+      let durationDays = Math.ceil(rawDuration * 2) / 2; // round to nearest 0.5 day
+      if (durationDays < 0.5) durationDays = 0.5;
+      
+      const gallonsNeeded = Math.ceil(area / coveragePerGallon);
+      
+      // Format output
+      priceLabel.innerText = `$${minCost.toLocaleString()} - $${maxCost.toLocaleString()}`;
+      durationLabel.innerText = `${durationDays} ${durationDays === 1 ? 'Day' : 'Days'}`;
+      gallonsLabel.innerText = `${gallonsNeeded} ${gallonsNeeded === 1 ? 'Gallon' : 'Gallons'}`;
+    }
+  </script>
+</body>
+</html>

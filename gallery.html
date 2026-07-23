@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery · Brush &amp; Roll – Premium Finishes</title>
+  
+  <!-- Custom Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='28' y='42' width='48' height='30' rx='6' fill='%23D4A373'/%3E%3Crect x='38' y='18' width='10' height='30' fill='%231E1E20'/%3E%3Ccircle cx='68' cy='58' r='12' fill='%23D4A373'/%3E%3C/svg%3E" />
+  
+  <!-- Tailwind CSS via Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            luxury: {
+              ivory: '#FAF9F6',
+              clay: '#F4F1DE',
+              charcoal: '#1E1E20',
+              obsidian: '#0B0B0C',
+              gold: '#D4A373',
+              'gold-hover': '#C59564',
+              'gold-light': '#F3E9DC',
+              terracotta: '#E76F51',
+              sage: '#81B29A',
+              slate: '#2E4057',
+              bronze: '#B58D5F',
+              border: '#E9E4DB',
+              'dark-bg': '#121214',
+              'dark-card': '#1C1C1E',
+              'dark-border': '#28282B',
+              'dark-text': '#E5E5E7'
+            }
+          },
+          fontFamily: {
+            display: ['"Poppins"', 'system-ui', 'sans-serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'float-slow': 'floatSlow 8s ease-in-out infinite',
+            'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'zoom-in': 'zoomIn 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+          },
+          keyframes: {
+            floatSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            slideUp: { '0%': { transform: 'translateY(40px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            zoomIn: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background-color: #FAF9F6;
+      color: #1E1E20;
+      font-family: 'Inter', sans-serif;
+    }
+    .dark body {
+      background-color: #121214;
+      color: #E5E5E7;
+    }
+
+    .pattern-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.15;
+    }
+    .dark .pattern-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      opacity: 0.04;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: #1E1E20;
+      transition: color 0.2s ease;
+    }
+    .dark .nav-link {
+      color: #E5E5E7;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #D4A373 !important;
+    }
+
+    .dropdown-school { position: relative; }
+    .dropdown-school-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 0.5rem 0;
+      box-shadow: 0 18px 32px rgba(0,0,0,0.06);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      border: 1px solid #E9E4DB;
+    }
+    .dark .dropdown-school-menu {
+      background: #1C1C1E;
+      border-color: #28282B;
+    }
+    .dropdown-school:hover .dropdown-school-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+      color: #1E1E20;
+    }
+    .dark .dropdown-item { color: #E5E5E7; }
+    .dropdown-item:hover {
+      background: #F4F1DE;
+      color: #0B0B0C;
+      padding-left: 1.7rem;
+    }
+    .dropdown-item i { margin-right: 0.75rem; width: 20px; }
+
+    .mobile-menu-school {
+      background: #FFFFFF;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 0 0 24px 24px;
+    }
+    .dark .mobile-menu-school {
+      background: #1C1C1E;
+    }
+    .mobile-menu-school.open {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    [dir="rtl"] .ml-auto { margin-left: 0 !important; margin-right: auto !important; }
+    [dir="rtl"] .mr-auto { margin-right: 0 !important; margin-left: auto !important; }
+    [dir="rtl"] .border-l-2 { border-left-width: 0 !important; border-right-width: 2px !important; }
+    [dir="rtl"] .pl-6 { padding-left: 0 !important; padding-right: 1.5rem !important; }
+
+    .btn-gold {
+      background: #D4A373;
+      color: #1E1E20;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3);
+    }
+    .btn-gold:hover {
+      background: #C59564;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 163, 115, 0.4);
+      color: #0B0B0C;
+    }
+    .dark .btn-gold {
+      background: #D4A373;
+      color: #0B0B0C;
+    }
+    .dark .btn-gold:hover {
+      background: #C59564;
+      color: #0B0B0C;
+    }
+
+    .social-icon-school {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #F4F1DE;
+      color: #1E1E20;
+      transition: all 0.3s;
+    }
+    .social-icon-school:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+      transform: translateY(-3px);
+    }
+    .dark .social-icon-school {
+      background: #28282B;
+      color: #E5E5E7;
+    }
+    .dark .social-icon-school:hover {
+      background: #D4A373;
+      color: #0B0B0C;
+    }
+
+    .hero-bg-pattern {
+      background: linear-gradient(to bottom, rgba(250, 249, 246, 0.72), rgba(250, 249, 246, 0.93)), url('assets/gallery_microcement.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .dark .hero-bg-pattern {
+      background: linear-gradient(to bottom, rgba(18, 18, 20, 0.75), rgba(18, 18, 20, 0.95)), url('assets/gallery_microcement.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .bg-gold-dots-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.12;
+    }
+    .dark .bg-gold-dots-light {
+      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
+    }
+
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.08) 0%, rgba(250, 249, 246, 0) 60%);
+    }
+    .dark .hero-overlay {
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.12) 0%, rgba(18, 18, 20, 0) 60%);
+    }
+
+    .mobile-active {
+      border-left: 3px solid #D4A373;
+      border-radius: 0 12px 12px 0 !important;
+      padding-left: 0.75rem !important;
+      color: #D4A373 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Gallery specific styles */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
+    }
+    .gallery-item img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 11, 12, 0.85) 0%, rgba(11, 11, 12, 0) 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+    .gallery-item .overlay-content {
+      transform: translateY(10px);
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover .overlay-content {
+      transform: translateY(0);
+    }
+    .filter-btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid #E9E4DB;
+      color: #1E1E20;
+      background: transparent;
+      cursor: pointer;
+    }
+    .dark .filter-btn {
+      border-color: #28282B;
+      color: #E5E5E7;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #D4A373;
+      color: #1E1E20;
+      border-color: #D4A373;
+    }
+    .dark .filter-btn:hover,
+    .dark .filter-btn.active {
+      background: #D4A373;
+      color: #0B0B0C;
+      border-color: #D4A373;
+    }
+    .before-after-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+    }
+    .before-after-card .divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: #D4A373;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .before-after-card .label {
+      position: absolute;
+      bottom: 1.5rem;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      z-index: 2;
+    }
+    .before-after-card .label-before {
+      left: 1.5rem;
+      background: rgba(0, 0, 0, 0.7);
+      color: #FAF9F6;
+    }
+    .before-after-card .label-after {
+      right: 1.5rem;
+      background: #D4A373;
+      color: #1E1E20;
+    }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-close:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen relative">
+  <div class="absolute inset-0 pattern-light pointer-events-none z-0"></div>
+
+  <!-- ======== NAVIGATION (IDENTICAL) ======== -->
+  <nav class="fixed top-6 left-6 right-6 z-50 bg-white/95 dark:bg-[#1C1C1E]/95 border border-neutral-200/50 dark:border-neutral-800/50 rounded-3xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.08)] px-8 py-3 transition-all duration-300">
+    <div class="flex items-center justify-between w-full">
+      <a class="flex items-center gap-3 group shrink-0" href='index.html'>
+        <div class="w-11 h-11 bg-neutral-900 dark:bg-luxury-gold rounded-full flex items-center justify-center shadow-md transition duration-300">
+          <i class="fas fa-paint-roller text-white dark:text-neutral-900 text-sm md:text-base"></i>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-base md:text-lg font-sans font-black tracking-tight text-neutral-900 dark:text-white leading-none">BRUSH<span class="text-luxury-gold font-semibold">&amp;ROLL</span></span>
+          <span class="text-[8px] md:text-[9px] tracking-[0.25em] font-extrabold text-luxury-gold uppercase mt-1.5 leading-none">Wall finishing</span>
+        </div>
+      </a>
+      
+      <div class="hidden xl:flex items-center gap-6 xl:gap-8">
+        <div class="dropdown-school">
+          <button class="nav-link text-sm font-semibold transition flex items-center gap-1 py-1 whitespace-nowrap focus:outline-none">
+            Home <i class="fas fa-chevron-down text-[9px] opacity-60 ml-1"></i>
+          </button>
+          <div class="dropdown-school-menu">
+            <a class="dropdown-item font-medium text-xs" href="index.html">Home 1</a>
+            <a class="dropdown-item font-medium text-xs" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="about.html">About</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="services.html">Services</a>
+        <a class="nav-link active text-sm font-medium transition whitespace-nowrap" href="gallery.html">Gallery</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="color-consultation.html">Color Consult</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="quote.html">Free Quote</a>
+        <a class="nav-link text-sm font-medium transition whitespace-nowrap" href="contact.html">Contact</a>
+      </div>
+      
+      <div class="hidden xl:flex items-center gap-4">
+        <div class="h-6 w-[1px] bg-neutral-200 dark:bg-neutral-800 self-center"></div>
+        <div class="flex items-center gap-3">
+          <div id="auth-buttons" class="flex items-center gap-3">
+            <a href="login.html" class="px-5 py-2 border border-neutral-300 dark:border-neutral-700 rounded-full text-xs font-semibold text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">Sign In</a>
+            <a href="register.html" class="px-5 py-2 bg-luxury-gold hover:bg-luxury-gold-hover text-neutral-950 font-bold rounded-full text-xs transition">Sign Up</a>
+          </div>
+          <div id="user-profile-menu" class="hidden relative">
+            <button id="user-menu-btn" class="w-10 h-10 rounded-full bg-luxury-gold text-neutral-950 font-bold flex items-center justify-center border border-luxury-border shadow-sm hover:scale-105 transition">
+              <span id="user-initials">U</span>
+            </button>
+            <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-[#1C1C1E] border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-2xl shadow-xl py-2 hidden z-50">
+              <div class="px-4 py-2 border-b border-luxury-border/60 dark:border-luxury-dark-border/60">
+                <p class="text-[10px] text-luxury-bronze">Logged in as</p>
+                <p id="user-display-name" class="text-xs font-bold truncate text-neutral-950 dark:text-luxury-ivory">User Name</p>
+              </div>
+              <a href="client.html" class="block px-4 py-2 text-xs text-luxury-charcoal dark:text-luxury-dark-text hover:bg-luxury-gold/10 hover:text-luxury-gold transition"><i class="fas fa-th-large mr-2"></i> Dashboard</a>
+              <a href="#" class="block px-4 py-2 text-xs text-luxury-charcoal dark:text-luxury-dark-text hover:bg-luxury-gold/10 hover:text-luxury-gold transition"><i class="fas fa-sliders-h mr-2"></i> Settings</a>
+              <hr class="my-1 border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <button id="logout-btn" class="w-full text-left px-4 py-2 text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition"><i class="fas fa-sign-out-alt mr-2"></i> Log Out</button>
+            </div>
+          </div>
+          <button id="theme-toggle" class="w-10 h-10 rounded-full bg-[#F5EFEB] dark:bg-neutral-800 text-luxury-gold hover:scale-105 transition flex items-center justify-center focus:outline-none">
+            <i class="fas fa-moon dark:hidden text-sm"></i>
+            <i class="fas fa-sun hidden dark:inline text-sm"></i>
+          </button>
+          <button id="rtl-toggle" class="w-10 h-10 rounded-full bg-[#F5EFEB] dark:bg-neutral-800 text-luxury-gold hover:scale-105 transition flex items-center justify-center text-sm focus:outline-none">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+        </div>
+      </div>
+      
+      <button id="mobile-toggle" class="xl:hidden w-10 h-10 rounded-full bg-luxury-gold text-neutral-950 flex items-center justify-center shadow-md">
+        <i class="fas fa-bars text-base"></i>
+      </button>
+    </div>
+    
+    <div id="mobile-menu" class="mobile-menu-school xl:hidden">
+      <div class="py-4 px-3 space-y-1">
+        <div class="space-y-1">
+          <button onclick="document.getElementById('mobile-home-submenu').classList.toggle('hidden'); document.getElementById('mobile-home-chevron').classList.toggle('rotate-180');" class="w-full text-left flex justify-between items-center py-3 px-4 font-medium hover:bg-neutral-50 transition dark:hover:bg-neutral-800">
+            Home <i id="mobile-home-chevron" class="fas fa-chevron-down text-xs opacity-60 transition-transform"></i>
+          </button>
+          <div id="mobile-home-submenu" class="hidden pl-6 space-y-1">
+            <a class="block py-2 px-4 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl" href="index.html">Home 1</a>
+            <a class="block py-2 px-4 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl" href="home2.html">Home 2</a>
+          </div>
+        </div>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="about.html">About</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="services.html">Services</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800 mobile-active" href="gallery.html">Gallery</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="color-consultation.html">Color Consult</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="quote.html">Free Quote</a>
+        <a class="block py-3 px-4 font-medium text-neutral-700 hover:bg-neutral-50 rounded-xl transition dark:text-white dark:hover:bg-neutral-800" href="contact.html">Contact</a>
+        <div class="flex flex-col gap-3 pt-5 mt-3 border-t border-neutral-200 dark:border-neutral-800">
+          <div id="mobile-auth-buttons" class="flex flex-col gap-2">
+            <a href="login.html" class="text-center py-2.5 rounded-full font-semibold border border-neutral-300 text-neutral-700 dark:text-white dark:border-neutral-700">Sign In</a>
+            <a href="register.html" class="text-center py-2.5 rounded-full font-semibold bg-luxury-gold text-neutral-950">Sign Up</a>
+          </div>
+          <div id="mobile-user-info" class="hidden flex flex-col gap-2">
+            <div class="flex items-center gap-3 px-4 py-2 bg-[#F3E9DC] dark:bg-luxury-dark-card rounded-2xl">
+              <div class="w-9 h-9 rounded-full bg-luxury-gold text-neutral-950 font-bold flex items-center justify-center shrink-0">
+                <span id="mobile-user-initials">U</span>
+              </div>
+              <div class="min-w-0">
+                <div id="mobile-user-name" class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-xs truncate">Client Name</div>
+                <div class="text-[9px] text-luxury-bronze">Logged in</div>
+              </div>
+            </div>
+            <a class="text-center py-2 rounded-full text-xs font-semibold bg-luxury-charcoal text-luxury-ivory dark:bg-luxury-ivory dark:text-luxury-obsidian" href="client.html">Go to Dashboard</a>
+            <button id="mobile-logout-btn" class="text-center py-2 rounded-full text-xs font-semibold text-red-500 border border-red-200 dark:border-red-950/20 hover:bg-red-50 dark:hover:bg-red-950/20">Log Out</button>
+          </div>
+          <div class="flex gap-3">
+            <button id="mobile-theme-toggle" class="flex-1 py-2 rounded-full bg-[#F3E9DC] dark:bg-neutral-800 text-luxury-gold text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i> Theme
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 py-2 rounded-full bg-[#F3E9DC] dark:bg-neutral-800 text-luxury-gold text-sm font-medium flex items-center gap-2 justify-center">
+              <i class="fas fa-exchange-alt"></i> RTL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======== GALLERY HERO ======== -->
+  <section class="min-h-[50vh] flex items-center pt-36 pb-16 relative overflow-hidden hero-bg-pattern">
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center animate-slide-up">
+        <span class="inline-block bg-[#D4A373] text-[#1E1E20] px-5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5">
+          <i class="fas fa-images mr-1"></i> Our Portfolio
+        </span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-display font-bold text-luxury-charcoal dark:text-luxury-ivory leading-[1.05]">
+          Transformations <span class="text-luxury-gold">Inspired</span><br />
+          <span class="text-3xl md:text-4xl xl:text-5xl font-light">by Excellence</span>
+        </h1>
+        <p class="text-lg text-luxury-charcoal/70 dark:text-luxury-dark-text/70 max-w-2xl mx-auto mt-6 leading-relaxed">
+          Explore our curated collection of projects showcasing the artistry, precision, and quality that define our work.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FILTER BUTTONS ======== -->
+  <section class="py-6 bg-[#F4F1DE] dark:bg-[#1C1C1E] border-b border-luxury-border/60 dark:border-luxury-dark-border/60 relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="interior">Interior</button>
+        <button class="filter-btn" data-filter="exterior">Exterior</button>
+        <button class="filter-btn" data-filter="specialty">Specialty Finishes</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== GALLERY GRID ======== -->
+  <section class="py-16 bg-[#FAF9F6] dark:bg-[#121214] relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto" id="gallery-grid">
+        <!-- Gallery Item 1 - Interior -->
+        <div class="gallery-item" data-category="interior">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=450&fit=crop&crop=center" alt="Modern Living Room">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Modern Living Room</h4>
+              <p class="text-sm opacity-90">Warm neutral tones · Interior</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 2 - Specialty -->
+        <div class="gallery-item" data-category="specialty">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=450&fit=crop&crop=center" alt="Venetian Plaster Wall">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Venetian Plaster</h4>
+              <p class="text-sm opacity-90">Polished lime finish · Specialty</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 3 - Exterior -->
+        <div class="gallery-item" data-category="exterior">
+          <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=600&h=450&fit=crop&crop=center" alt="Modern Exterior">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Modern Exterior</h4>
+              <p class="text-sm opacity-90">Weatherproof clay finish · Exterior</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 4 - Commercial -->
+        <div class="gallery-item" data-category="commercial">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=450&fit=crop&crop=center" alt="Office Interior">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Corporate Office</h4>
+              <p class="text-sm opacity-90">Modern commercial · Commercial</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 5 - Interior -->
+        <div class="gallery-item" data-category="interior">
+          <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=600&h=450&fit=crop&crop=center" alt="Sage Kitchen">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Sage Kitchen</h4>
+              <p class="text-sm opacity-90">Custom cabinetry · Interior</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 6 - Specialty -->
+        <div class="gallery-item" data-category="specialty">
+          <img src="assets/gallery_microcement.png" alt="Microcement Wall">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Microcement Finish</h4>
+              <p class="text-sm opacity-90">Seamless concrete · Specialty</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 7 - Exterior -->
+        <div class="gallery-item" data-category="exterior">
+          <img src="assets/new_exterior.png" alt="Exterior Facade">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Residential Facade</h4>
+              <p class="text-sm opacity-90">Premium exterior coat · Exterior</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 8 - Commercial -->
+        <div class="gallery-item" data-category="commercial">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&h=450&fit=crop&crop=center" alt="Restaurant Interior">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Restaurant Interior</h4>
+              <p class="text-sm opacity-90">Warm ambiance · Commercial</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 9 - Interior -->
+        <div class="gallery-item" data-category="interior">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=450&fit=crop&crop=center" alt="Master Bedroom">
+          <div class="overlay">
+            <div class="overlay-content text-white">
+              <h4 class="text-lg font-bold">Master Bedroom</h4>
+              <p class="text-sm opacity-90">Serene palette · Interior</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== BEFORE & AFTER SHOWCASE ======== -->
+  <section class="py-20 bg-[#F4F1DE] dark:bg-[#1C1C1E] border-y border-luxury-border/60 dark:border-luxury-dark-border/60 relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-14">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-magic mr-1"></i> Before &amp; After
+        </span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          The <span class="text-[#D4A373]">Dramatic</span> Difference
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-3 text-sm">
+          See the transformation our expert craftsmanship brings to every project.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Before/After 1 -->
+        <div class="before-after-card bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 shadow-md">
+          <div class="relative h-72 overflow-hidden">
+            <!-- Before Image (identical image with desaturated/dull filter) -->
+            <img src="assets/new_interior.png" alt="Before" class="absolute inset-0 w-full h-full object-cover" style="filter: grayscale(70%) brightness(75%) contrast(90%) saturate(45%);">
+            <!-- After Image Container (clipped to right 50%) -->
+            <div class="absolute inset-y-0 right-0 left-[50%] overflow-hidden">
+              <!-- After Image (original bright image) -->
+              <img src="assets/new_interior.png" alt="After" class="absolute inset-y-0 left-[-100%] w-[200%] max-w-none h-full object-cover">
+            </div>
+            <!-- Divider & Labels -->
+            <div class="divider"></div>
+            <span class="label label-before">Before</span>
+            <span class="label label-after">After</span>
+          </div>
+          <div class="p-6">
+            <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Living Room Transformation</h4>
+            <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Dated walls refreshed with warm neutral tones and premium finish.</p>
+          </div>
+        </div>
+        
+        <!-- Before/After 2 -->
+        <div class="before-after-card bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 shadow-md">
+          <div class="relative h-72 overflow-hidden">
+            <!-- Before Image (identical image with weathered/dull filter) -->
+            <img src="assets/new_exterior.png" alt="Before" class="absolute inset-0 w-full h-full object-cover" style="filter: grayscale(75%) brightness(70%) contrast(95%) saturate(45%);">
+            <!-- After Image Container (clipped to right 50%) -->
+            <div class="absolute inset-y-0 right-0 left-[50%] overflow-hidden">
+              <!-- After Image (original crisp image) -->
+              <img src="assets/new_exterior.png" alt="After" class="absolute inset-y-0 left-[-100%] w-[200%] max-w-none h-full object-cover">
+            </div>
+            <!-- Divider & Labels -->
+            <div class="divider"></div>
+            <span class="label label-before">Before</span>
+            <span class="label label-after">After</span>
+          </div>
+          <div class="p-6">
+            <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Exterior Facade Renewal</h4>
+            <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Faded exterior restored with durable, weather-resistant paint.</p>
+          </div>
+        </div>
+        
+        <!-- Before/After 3 -->
+        <div class="before-after-card bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 shadow-md">
+          <div class="relative h-72 overflow-hidden">
+            <!-- Before Image (identical image with faded wood/dull filter) -->
+            <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=600&h=400&fit=crop&crop=center" alt="Before" class="absolute inset-0 w-full h-full object-cover" style="filter: grayscale(80%) brightness(75%) contrast(85%) saturate(40%) sepia(10%);">
+            <!-- After Image Container (clipped to right 50%) -->
+            <div class="absolute inset-y-0 right-0 left-[50%] overflow-hidden">
+              <!-- After Image (original bright sage green image) -->
+              <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=600&h=400&fit=crop&crop=center" alt="After" class="absolute inset-y-0 left-[-100%] w-[200%] max-w-none h-full object-cover">
+            </div>
+            <!-- Divider & Labels -->
+            <div class="divider"></div>
+            <span class="label label-before">Before</span>
+            <span class="label label-after">After</span>
+          </div>
+          <div class="p-6">
+            <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Kitchen Cabinet Refresh</h4>
+            <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Outdated cabinets transformed with custom sage finish and new hardware.</p>
+          </div>
+        </div>
+        
+        <!-- Before/After 4 -->
+        <div class="before-after-card bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 shadow-md">
+          <div class="relative h-72 overflow-hidden">
+            <!-- Before Image (identical texture with flat/gray drywall filter) -->
+            <img src="assets/after_polished_gold.png" alt="Before" class="absolute inset-0 w-full h-full object-cover" style="filter: grayscale(100%) brightness(60%) contrast(110%);">
+            <!-- After Image Container (clipped to right 50%) -->
+            <div class="absolute inset-y-0 right-0 left-[50%] overflow-hidden">
+              <!-- After Image (original shiny gold texture) -->
+              <img src="assets/after_polished_gold.png" alt="After" class="absolute inset-y-0 left-[-100%] w-[200%] max-w-none h-full object-cover">
+            </div>
+            <!-- Divider & Labels -->
+            <div class="divider"></div>
+            <span class="label label-before">Before</span>
+            <span class="label label-after">After</span>
+          </div>
+          <div class="p-6">
+            <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Venetian Plaster Wall</h4>
+            <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Plain wall elevated with hand-troweled Venetian plaster finish.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA ======== -->
+  <section class="py-16 bg-[#1E1E20] dark:bg-[#0B0B0C] relative z-10">
+    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none opacity-20"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h3 class="text-3xl md:text-4xl font-display font-bold text-luxury-ivory mb-4">
+          Ready for Your <span class="text-luxury-gold">Transformation</span>?
+        </h3>
+        <p class="text-luxury-bronze text-base max-w-xl mx-auto mb-8">
+          Let's create something beautiful together. Contact us for a free consultation and quote.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="quote.html" class="btn-gold px-10 py-4 rounded-full inline-flex items-center gap-3 text-base shadow-lg">
+            <i class="fas fa-file-invoice"></i> Get a Free Quote
+          </a>
+          <a href="services.html" class="px-10 py-4 rounded-full inline-flex items-center gap-3 text-base border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-obsidian transition duration-300 font-semibold">
+            <i class="fas fa-brush"></i> Our Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== LIGHTBOX ======== -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" id="lightbox-close">
+      <i class="fas fa-times"></i>
+    </div>
+    <img id="lightbox-img" src="" alt="Gallery image">
+  </div>
+
+  <!-- ======== FOOTER (IDENTICAL) ======== -->
+  <footer class="bg-white dark:bg-[#121214] text-neutral-800 dark:text-[#E5E5E7] pt-16 pb-8 border-t border-[#E9E4DB] dark:border-[#28282B]">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div class="text-center md:text-start">
+          <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+            <div class="w-11 h-11 bg-neutral-900 dark:bg-[#D4A373] rounded-full flex items-center justify-center shadow-md shrink-0">
+              <i class="fas fa-paint-roller text-white dark:text-neutral-900 text-sm md:text-base"></i>
+            </div>
+            <div class="flex flex-col text-left">
+              <span class="text-base md:text-lg font-sans font-black tracking-tight text-neutral-900 dark:text-white leading-none">BRUSH<span class="text-[#D4A373] font-semibold">&amp;ROLL</span></span>
+              <span class="text-[8px] md:text-[9px] tracking-[0.25em] font-extrabold text-[#D4A373] uppercase mt-1.5 leading-none">Wall finishing</span>
+            </div>
+          </div>
+          <p class="mb-5 text-neutral-500 dark:text-[#B58D5F] text-sm">Premium painting & wall finishing. Craftsmanship you can see.</p>
+          <div class="flex justify-center md:justify-start gap-3">
+            <a href="#" class="social-icon-school"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon-school"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon-school"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="text-center md:text-start">
+          <h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Explore</h4>
+          <ul class="space-y-2">
+            <li><a href="services.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Services</a></li>
+            <li><a href="gallery.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Gallery</a></li>
+            <li><a href="quote.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Free Quote</a></li>
+          </ul>
+        </div>
+        <div class="text-center md:text-start">
+          <h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">About</a></li>
+            <li><a href="#" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Careers</a></li>
+            <li><a href="contact.html" class="hover:text-[#D4A373] transition block text-neutral-600 dark:text-[#B58D5F]">Contact</a></li>
+          </ul>
+        </div>
+        <div class="text-center md:text-start">
+          <h4 class="text-[#D4A373] font-bold text-lg mb-5 uppercase tracking-wider">Studio</h4>
+          <ul class="space-y-3">
+            <li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]">
+              <i class="fas fa-map-marker-alt text-[#D4A373] mt-1"></i><span>12 Paint St, Color City</span>
+            </li>
+            <li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]">
+              <i class="fas fa-phone text-[#D4A373]"></i><span>(555) 987-6543</span>
+            </li>
+            <li class="flex justify-center md:justify-start gap-3 text-neutral-600 dark:text-[#B58D5F]">
+              <i class="fas fa-envelope text-[#D4A373]"></i><span>artisan@brushandroll.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-[#E9E4DB] dark:border-[#28282B] text-center text-sm text-neutral-500 dark:text-[#B58D5F]">
+        <p>&copy; 2026 BRUSH &amp; ROLL · Painting & Wall Finishing. <i class="fas fa-heart text-[#D4A373] mx-1"></i> Transforming spaces.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== SCRIPTS ======== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme toggles
+      const themeBtns = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+      themeBtns.forEach(btn => {
+        btn?.addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+      });
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+
+      // RTL
+      function setRTL(isRTL) {
+        const html = document.documentElement;
+        if (isRTL === 'rtl' || isRTL === true) {
+          html.setAttribute('dir', 'rtl');
+          localStorage.setItem('dir', 'rtl');
+        } else {
+          html.setAttribute('dir', 'ltr');
+          localStorage.setItem('dir', 'ltr');
+        }
+      }
+      const savedDir = localStorage.getItem('dir');
+      if (savedDir === 'rtl') document.documentElement.setAttribute('dir', 'rtl');
+      
+      const rtlBtn = document.getElementById('rtl-toggle');
+      if (rtlBtn) {
+        rtlBtn.addEventListener('click', () => {
+          const currentDir = document.documentElement.getAttribute('dir');
+          setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        });
+      }
+      const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+      if (mobileRtlBtn) {
+        mobileRtlBtn.addEventListener('click', () => {
+          const currentDir = document.documentElement.getAttribute('dir');
+          setRTL(currentDir === 'rtl' ? 'ltr' : 'rtl');
+        });
+      }
+
+      // Mobile Menu
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('open');
+          const icon = mobileToggle.querySelector('i');
+          if (mobileMenu.classList.contains('open')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden';
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = '';
+          }
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+            document.body.style.overflow = '';
+          });
+        });
+      }
+
+      // User Session
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const authButtons = document.getElementById('auth-buttons');
+      const userProfileMenu = document.getElementById('user-profile-menu');
+      const userInitials = document.getElementById('user-initials');
+      const userDisplayName = document.getElementById('user-display-name');
+      const mobileAuthButtons = document.getElementById('mobile-auth-buttons');
+      const mobileUserInfo = document.getElementById('mobile-user-info');
+      const mobileUserInitials = document.getElementById('mobile-user-initials');
+      const mobileUserName = document.getElementById('mobile-user-name');
+      
+      // Always show sign in/up buttons and hide profile menu
+      if (authButtons) authButtons.classList.remove('hidden');
+      if (userProfileMenu) userProfileMenu.classList.add('hidden');
+      if (mobileAuthButtons) mobileAuthButtons.classList.remove('hidden');
+      if (mobileUserInfo) mobileUserInfo.classList.add('hidden');
+
+      const userMenuBtn = document.getElementById('user-menu-btn');
+      const userDropdown = document.getElementById('user-dropdown');
+      if (userMenuBtn && userDropdown) {
+        userMenuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          userDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => {
+          userDropdown.classList.add('hidden');
+        });
+      }
+
+      const handleLogout = () => {
+        localStorage.removeItem('currentUser');
+        window.location.reload();
+      };
+      document.getElementById('logout-btn')?.addEventListener('click', handleLogout);
+      document.getElementById('mobile-logout-btn')?.addEventListener('click', handleLogout);
+
+      // === GALLERY FILTER FUNCTIONALITY ===
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filter = btn.dataset.filter;
+          
+          galleryItems.forEach(item => {
+            const category = item.dataset.category;
+            if (filter === 'all' || category === filter) {
+              item.style.display = 'block';
+              item.style.animation = 'zoomIn 0.5s ease forwards';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // === LIGHTBOX FUNCTIONALITY ===
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxClose = document.getElementById('lightbox-close');
+
+      galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          if (img) {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
