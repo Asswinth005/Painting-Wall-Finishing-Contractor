@@ -449,6 +449,48 @@
       background: linear-gradient(135deg, #1C1C1E 0%, #121214 100%);
       border-color: #28282B;
     }
+
+    /* Process Flow Styles */
+    .process-step {
+      position: relative;
+      padding-left: 3rem;
+    }
+    .process-step::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, #D4A373, #E9E4DB);
+    }
+    .dark .process-step::before {
+      background: linear-gradient(to bottom, #D4A373, #28282B);
+    }
+    .process-step:last-child::before {
+      height: 0.5rem;
+    }
+    .process-number {
+      position: absolute;
+      left: -0.75rem;
+      top: 0;
+      width: 2rem;
+      height: 2rem;
+      background: #D4A373;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1E1E20;
+      font-weight: 700;
+      font-size: 0.75rem;
+      border: 2px solid #FAF9F6;
+      box-shadow: 0 0 0 2px #D4A373;
+    }
+    .dark .process-number {
+      border-color: #121214;
+      box-shadow: 0 0 0 2px #D4A373;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen relative">
