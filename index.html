@@ -82,14 +82,17 @@
     }
 
     .pattern-light {
-      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-      opacity: 0.15;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.04) 0%, transparent 80%),
+        radial-gradient(circle at 0% 0%, rgba(212, 163, 115, 0.02) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+      opacity: 1;
     }
     .dark .pattern-light {
-      background-image: radial-gradient(#D4A373 0.75px, transparent 0.75px), radial-gradient(#D4A373 0.75px, transparent 0.75px);
-      opacity: 0.04;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 80%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 1;
     }
 
     /* Navigation */
@@ -348,6 +351,103 @@
       padding-left: 0.75rem !important;
       color: #D4A373 !important;
       font-weight: 700 !important;
+    }
+
+    /* Brush stroke heading styling */
+    .brush-header {
+      position: relative;
+      display: inline-block;
+    }
+    .brush-stroke-svg {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110%;
+      height: 16px;
+      color: rgba(212, 163, 115, 0.45);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Before & After Comparison Slider */
+    .ba-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      border: 1px solid #E9E4DB;
+      aspect-ratio: 16/10;
+      width: 100%;
+    }
+    .dark .ba-slider {
+      border-color: #28282B;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.4);
+    }
+    .ba-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+    }
+    .ba-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .ba-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #D4A373;
+      cursor: ew-resize;
+      z-index: 30;
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    }
+    .ba-handle-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #D4A373;
+      color: #1E1E20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      border: 3px solid #FAF9F6;
+      font-size: 14px;
+      pointer-events: none;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .dark .ba-handle-button {
+      background: #D4A373;
+      color: #0B0B0C;
+      border-color: #1C1C1E;
+    }
+    .ba-slider:hover .ba-handle-button {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    /* Why Choose Us Service Badges */
+    .service-badge {
+      background: linear-gradient(135deg, #F3E9DC 0%, #FAF9F6 100%);
+      border: 1px solid #E9E4DB;
+    }
+    .dark .service-badge {
+      background: linear-gradient(135deg, #1C1C1E 0%, #121214 100%);
+      border-color: #28282B;
     }
   </style>
 </head>
@@ -642,35 +742,320 @@
   </section>
 
   <!-- ======== SERVICES ======== -->
-  <section id="services" class="py-20 bg-[#F4F1DE] dark:bg-[#1C1C1E] relative">
-    <div class="absolute inset-0 bg-gold-dots-light pointer-events-none"></div>
+  <section id="services" class="py-20 bg-[#F4F1DE]/40 dark:bg-[#1C1C1E]/40 relative border-b border-luxury-border/60 dark:border-luxury-dark-border/60">
     <div class="container mx-auto px-6 relative z-10">
-      <div class="text-center mb-14">
+      <div class="text-center mb-16">
         <span class="text-[#D4A373] font-semibold tracking-wider text-sm uppercase bg-[#F3E9DC] dark:bg-[#2E2A24] px-5 py-1.5 rounded-full inline-block"><i class="fas fa-star text-xs mr-1"></i> what we do</span>
-        <h2 class="text-3xl md:text-4xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white">Premium <span class="text-[#D4A373]">Painting</span> & Finishing</h2>
-        <p class="text-[#2E4057] dark:text-[#B58D5F] max-w-2xl mx-auto mt-3">From classic emulsions to Venetian plaster, we bring artistry to every surface.</p>
+        <h2 class="text-4xl md:text-5xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white">
+          <span class="brush-header">
+            Premium <span class="text-[#D4A373]">Finishing Services</span>
+            <svg class="brush-stroke-svg" viewBox="0 0 500 30" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M15 20C120 12 350 25 485 15" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </h2>
+        <p class="text-[#2E4057] dark:text-[#B58D5F] max-w-2xl mx-auto mt-6 text-base">From masterfully prepared interior walls to weatherproof exterior shields and hand-crafted plasters, we refine every surface.</p>
       </div>
+
       <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="card-finish p-8 text-center group">
-          <div class="w-20 h-20 mx-auto bg-[#F3E9DC] dark:bg-[#28282B] rounded-2xl flex items-center justify-center text-4xl text-[#D4A373] group-hover:scale-110 transition duration-300 mb-5">
-            <i class="fas fa-house-chimney"></i>
+        <!-- Card 1: Interior Painting -->
+        <div class="group bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="h-56 overflow-hidden relative shrink-0">
+            <img src="assets/new_interior.png" alt="Luxury Interior Painting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-6 flex items-center gap-2">
+              <span class="w-8 h-8 bg-luxury-gold text-neutral-900 rounded-full flex items-center justify-center text-xs shadow-md"><i class="fas fa-paint-brush"></i></span>
+              <span class="text-white font-bold text-xs uppercase tracking-wider">Residential & Commercial</span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-[#1E1E20] dark:text-white mb-3">Interior Painting</h3>
-          <p class="text-[#2E4057] dark:text-[#B58D5F] text-sm leading-relaxed">Flawless walls, ceilings, trim, and cabinetry. Premium paints and meticulous preparation.</p>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-[#1E1E20] dark:text-white mb-3">Interior Brushwork</h3>
+            <p class="text-[#2E4057] dark:text-[#B58D5F] text-sm leading-relaxed mb-4">Meticulous multi-stage wall preparation, drywall sanding, and dust-free execution. Finished with premium eco-friendly emulsions that last.</p>
+            <ul class="space-y-2 text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 border-t border-luxury-border/30 dark:border-luxury-dark-border/30 pt-4">
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Cabinetry & Trim Spray-Finishes</li>
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Eco-friendly Zero-VOC Paints</li>
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Precise Color Swatch Testing</li>
+            </ul>
+          </div>
         </div>
-        <div class="card-finish p-8 text-center group">
-          <div class="w-20 h-20 mx-auto bg-[#F3E9DC] dark:bg-[#28282B] rounded-2xl flex items-center justify-center text-4xl text-[#D4A373] group-hover:scale-110 transition duration-300 mb-5">
-            <i class="fas fa-tree"></i>
+
+        <!-- Card 2: Exterior Painting -->
+        <div class="group bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="h-56 overflow-hidden relative shrink-0">
+            <img src="assets/new_exterior.png" alt="Weatherproof Exterior Coatings" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-6 flex items-center gap-2">
+              <span class="w-8 h-8 bg-luxury-gold text-neutral-900 rounded-full flex items-center justify-center text-xs shadow-md"><i class="fas fa-shield-alt"></i></span>
+              <span class="text-white font-bold text-xs uppercase tracking-wider">Durability Guard</span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-[#1E1E20] dark:text-white mb-3">Exterior Finishes</h3>
-          <p class="text-[#2E4057] dark:text-[#B58D5F] text-sm leading-relaxed">Weather-resistant coatings, siding, stucco, and deck sealing. Curb appeal guaranteed.</p>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-[#1E1E20] dark:text-white mb-3">Exterior Refinishing</h3>
+            <p class="text-[#2E4057] dark:text-[#B58D5F] text-sm leading-relaxed mb-4">High-durability elastomeric coatings that resist UV rays, thermal cracking, and monsoon rains. Protect your brick, wood siding, and stucco walls.</p>
+            <ul class="space-y-2 text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 border-t border-luxury-border/30 dark:border-luxury-dark-border/30 pt-4">
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Power Wash & Mold Treatment</li>
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Elastomeric Waterproof Barriers</li>
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Deck, Siding & Stucco Sealing</li>
+            </ul>
+          </div>
         </div>
-        <div class="card-finish p-8 text-center group">
-          <div class="w-20 h-20 mx-auto bg-[#F3E9DC] dark:bg-[#28282B] rounded-2xl flex items-center justify-center text-4xl text-[#D4A373] group-hover:scale-110 transition duration-300 mb-5">
-            <i class="fas fa-palette"></i>
+
+        <!-- Card 3: Specialty Finishes -->
+        <div class="group bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="h-56 overflow-hidden relative shrink-0">
+            <img src="assets/new_specialty.png" alt="Specialty Lime Plaster" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-6 flex items-center gap-2">
+              <span class="w-8 h-8 bg-luxury-gold text-neutral-900 rounded-full flex items-center justify-center text-xs shadow-md"><i class="fas fa-gem"></i></span>
+              <span class="text-white font-bold text-xs uppercase tracking-wider">Artisanship</span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-[#1E1E20] dark:text-white mb-3">Color Consultation</h3>
-          <p class="text-[#2E4057] dark:text-[#B58D5F] text-sm leading-relaxed">Expert guidance to select the perfect palette. We bring samples and vision boards.</p>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-[#1E1E20] dark:text-white mb-3">Artisan Wall Coatings</h3>
+            <p class="text-[#2E4057] dark:text-[#B58D5F] text-sm leading-relaxed mb-4">Old-world Italian lime wash, microcement overlay, and venetian plaster troweled in layers. Delivers organic texture and subtle light reflection.</p>
+            <ul class="space-y-2 text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 border-t border-luxury-border/30 dark:border-luxury-dark-border/30 pt-4">
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Hand-troweled Lime Plaster</li>
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Microcement Flooring & Accents</li>
+              <li><i class="fas fa-check text-luxury-gold mr-2"></i>Burnished Metallic Veining</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SIGNATURE COATINGS SECTION ======== -->
+  <section class="py-20 bg-[#FAF9F6] dark:bg-[#121214] border-b border-luxury-border/60 dark:border-luxury-dark-border/60 relative z-10">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-paint-roller mr-1"></i> Our Finishes
+        </span>
+        <h2 class="text-3xl md:text-5xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          <span class="brush-header">
+            Signature <span class="text-[#D4A373]">Wall Coatings</span>
+            <svg class="brush-stroke-svg" viewBox="0 0 500 30" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M15 20C120 12 350 25 485 15" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-6 text-sm">
+          Each finish is meticulously applied by artisan craftsmen using time-honored techniques and premium materials.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Card 1: Venetian Plaster -->
+        <div class="group flex flex-col h-full bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="h-52 overflow-hidden relative shrink-0">
+            <img src="assets/wall_venetian.png" alt="Venetian Plaster" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 md:p-8 flex flex-col justify-between flex-1">
+            <div>
+              <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory">Venetian Plaster</h4>
+              <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-3 leading-relaxed">
+                Hand-troweled lime plaster with depth and subtle veining. Available in matte, polished, or burnished finishes.
+              </p>
+            </div>
+            <a href="services.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-luxury-gold hover:text-luxury-gold-hover transition mt-6 group">
+              Learn More <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Microcement -->
+        <div class="group flex flex-col h-full bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="h-52 overflow-hidden relative shrink-0">
+            <img src="assets/wall_microcement.png" alt="Microcement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 md:p-8 flex flex-col justify-between flex-1">
+            <div>
+              <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory">Microcement</h4>
+              <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-3 leading-relaxed">
+                Ultra-thin concrete overlay for walls, floors, and surfaces. Seamless, waterproof, and available in custom colors.
+              </p>
+            </div>
+            <a href="services.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-luxury-gold hover:text-luxury-gold-hover transition mt-6 group">
+              Learn More <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Mineral Paint -->
+        <div class="group flex flex-col h-full bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60 rounded-[32px] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="h-52 overflow-hidden relative shrink-0">
+            <img src="assets/wall_mineral.png" alt="Mineral Paint" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 md:p-8 flex flex-col justify-between flex-1">
+            <div>
+              <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory">Mineral Paint</h4>
+              <p class="text-xs text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-3 leading-relaxed">
+                Breathable, eco-friendly mineral-based paints that bond with masonry surfaces for unmatched durability.
+              </p>
+            </div>
+            <a href="services.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-luxury-gold hover:text-luxury-gold-hover transition mt-6 group">
+              Learn More <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PORTFOLIO TRANSFORMATION SLIDER ======== -->
+  <section class="py-20 bg-white dark:bg-[#121214] relative z-10 border-b border-luxury-border/60 dark:border-luxury-dark-border/60">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <span class="inline-block bg-[#F3E9DC] dark:bg-[#2E2A24] text-[#D4A373] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          <i class="fas fa-magic mr-1"></i> Transformations
+        </span>
+        <h2 class="text-3xl md:text-5xl font-display font-bold mt-5 text-[#1E1E20] dark:text-white leading-tight">
+          <span class="brush-header">
+            Before & <span class="text-[#D4A373]">After Showcase</span>
+            <svg class="brush-stroke-svg" viewBox="0 0 500 30" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M15 20C120 12 350 25 485 15" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </h2>
+        <p class="text-luxury-charcoal/60 dark:text-luxury-dark-text/60 max-w-2xl mx-auto mt-6 text-sm">
+          Drag the slider handle to interactively view the dramatic difference our professional preparation and artisan wall finishing can make.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <!-- Slider 1: Damaged Wall -> Polished Gold Finish -->
+        <div class="space-y-4">
+          <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory text-center">Polished Gold Accent Plaster</h4>
+          <div class="ba-slider select-none" id="slider-gold">
+            <!-- Before Image -->
+            <img src="assets/before_damaged_wall.png" alt="Before: Damaged Wall" class="ba-image">
+            
+            <!-- After Image Container (revealed via width) -->
+            <div class="ba-overlay w-1/2">
+              <img src="assets/after_polished_gold.png" alt="After: Polished Gold" class="ba-image">
+            </div>
+            
+            <!-- Handle -->
+            <div class="ba-handle left-1/2">
+              <div class="ba-handle-button">
+                <i class="fas fa-arrows-alt-h"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-center text-luxury-charcoal/50 dark:text-luxury-dark-text/50 italic">Transformation of a cracked, water-damaged wall into hand-burnished luxury gold plaster.</p>
+        </div>
+
+        <!-- Slider 2: Faded Siding -> Weatherproof Regal Navy -->
+        <div class="space-y-4">
+          <h4 class="text-lg font-serif font-bold text-luxury-charcoal dark:text-luxury-ivory text-center">Regal Navy Weatherproof Coating</h4>
+          <div class="ba-slider select-none" id="slider-navy">
+            <!-- Before Image -->
+            <img src="assets/before_faded_paint.png" alt="Before: Faded Paint" class="ba-image">
+            
+            <!-- After Image Container (revealed via width) -->
+            <div class="ba-overlay w-1/2">
+              <img src="assets/after_regal_navy.png" alt="After: Regal Navy" class="ba-image">
+            </div>
+            
+            <!-- Handle -->
+            <div class="ba-handle left-1/2">
+              <div class="ba-handle-button">
+                <i class="fas fa-arrows-alt-h"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-center text-luxury-charcoal/50 dark:text-luxury-dark-text/50 italic">Exterior siding restore using multi-layered weatherproof navy coatings resisting UV fading.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== WHY CHOOSE US ======== -->
+  <section class="py-20 bg-[#FAF9F6] dark:bg-[#121214] relative z-10 border-b border-luxury-border/60 dark:border-luxury-dark-border/60">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div class="space-y-6">
+          <span class="inline-block text-[#D4A373] font-semibold tracking-wider text-sm uppercase bg-[#F3E9DC] dark:bg-[#2E2A24] px-5 py-1.5 rounded-full">
+            <i class="fas fa-star text-xs mr-1"></i> Why Choose Us
+          </span>
+          <h2 class="text-4xl md:text-5xl font-display font-bold text-luxury-charcoal dark:text-luxury-ivory leading-tight">
+            <span class="brush-header">
+              The <span class="text-luxury-gold">Art</span> of Perfect Finishes
+              <svg class="brush-stroke-svg" viewBox="0 0 500 30" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M15 20C120 12 350 25 485 15" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </h2>
+          <p class="text-luxury-charcoal/70 dark:text-luxury-dark-text/70 leading-relaxed">
+            Every project is treated as a masterpiece. From meticulous surface preparation to the final coat, we ensure flawless results that stand the test of time.
+          </p>
+          
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-luxury-gold/20 flex items-center justify-center shrink-0 mt-1">
+                <i class="fas fa-check text-luxury-gold text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Premium Materials</h4>
+                <p class="text-sm text-luxury-charcoal/60 dark:text-luxury-dark-text/60">We use only the highest quality paints, primers, and specialty finishes.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-luxury-gold/20 flex items-center justify-center shrink-0 mt-1">
+                <i class="fas fa-check text-luxury-gold text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Skilled Craftsmen</h4>
+                <p class="text-sm text-luxury-charcoal/60 dark:text-luxury-dark-text/60">Our team brings years of experience and an eye for detail to every project.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-luxury-gold/20 flex items-center justify-center shrink-0 mt-1">
+                <i class="fas fa-check text-luxury-gold text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory">Complete Satisfaction</h4>
+                <p class="text-sm text-luxury-charcoal/60 dark:text-luxury-dark-text/60">We don't finish until you're 100% happy with every wall and surface.</p>
+              </div>
+            </div>
+          </div>
+          
+          <a href="services.html" class="inline-flex items-center gap-2 text-luxury-gold font-semibold hover:underline group">
+            Start your project <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+          </a>
+        </div>
+        
+        <div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="service-badge rounded-2xl overflow-hidden transition duration-300 hover:shadow-md hover:-translate-y-0.5 bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <img src="assets/interior_painting.png" alt="Interior Painting" class="w-full h-32 object-cover">
+              <div class="p-4 text-center">
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-sm">Interior</h4>
+                <p class="text-[11px] text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Walls, ceilings, trim</p>
+              </div>
+            </div>
+            <div class="service-badge rounded-2xl overflow-hidden transition duration-300 hover:shadow-md hover:-translate-y-0.5 bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <img src="assets/exterior_painting.png" alt="Exterior Painting" class="w-full h-32 object-cover object-top">
+              <div class="p-4 text-center">
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-sm">Exterior</h4>
+                <p class="text-[11px] text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Siding, stucco, decks</p>
+              </div>
+            </div>
+            <div class="service-badge rounded-2xl overflow-hidden transition duration-300 hover:shadow-md hover:-translate-y-0.5 bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <img src="assets/color_consult.png" alt="Color Consultation" class="w-full h-32 object-cover">
+              <div class="p-4 text-center">
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-sm">Color Consult</h4>
+                <p class="text-[11px] text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Expert palette advice</p>
+              </div>
+            </div>
+            <div class="service-badge rounded-2xl overflow-hidden transition duration-300 hover:shadow-md hover:-translate-y-0.5 bg-white dark:bg-luxury-dark-card border border-luxury-border/60 dark:border-luxury-dark-border/60">
+              <img src="assets/specialty_finishes.png" alt="Specialty Finishes" class="w-full h-32 object-cover">
+              <div class="p-4 text-center">
+                <h4 class="font-bold text-luxury-charcoal dark:text-luxury-ivory text-sm">Specialty</h4>
+                <p class="text-[11px] text-luxury-charcoal/60 dark:text-luxury-dark-text/60 mt-1">Venetian plaster & more</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -710,9 +1095,9 @@
         <h2 class="text-3xl md:text-4xl font-display font-bold text-[#1E1E20] dark:text-white">What <span class="text-[#D4A373]">Clients Say</span></h2>
       </div>
       <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="testimonial-card shadow-lg"><div class="flex gap-1 mb-3"><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i></div><p class="text-[#2E4057] dark:text-[#B58D5F] leading-relaxed">"The team transformed our dated living room into a sophisticated space. The color consultation was invaluable."</p><div class="flex items-center gap-3 mt-4"><div class="w-12 h-12 rounded-full bg-[#D4A373] flex items-center justify-center text-[#1E1E20] font-bold">AK</div><div><strong class="text-[#1E1E20] dark:text-white">Amanda K.</strong><div class="text-xs text-[#B58D5F]">homeowner</div></div></div></div>
-        <div class="testimonial-card shadow-lg"><div class="flex gap-1 mb-3"><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i></div><p class="text-[#2E4057] dark:text-[#B58D5F] leading-relaxed">"Our office looks stunning with the new wall finishes. Professional, timely, and incredibly clean work."</p><div class="flex items-center gap-3 mt-4"><div class="w-12 h-12 rounded-full bg-[#D4A373] flex items-center justify-center text-[#1E1E20] font-bold">MR</div><div><strong class="text-[#1E1E20] dark:text-white">Marcus R.</strong><div class="text-xs text-[#B58D5F]">business owner</div></div></div></div>
-        <div class="testimonial-card shadow-lg"><div class="flex gap-1 mb-3"><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i></div><p class="text-[#2E4057] dark:text-[#B58D5F] leading-relaxed">"We love the Venetian plaster finish in our entryway. It feels like a gallery wall. Highly recommend!"</p><div class="flex items-center gap-3 mt-4"><div class="w-12 h-12 rounded-full bg-[#D4A373] flex items-center justify-center text-[#1E1E20] font-bold">LZ</div><div><strong class="text-[#1E1E20] dark:text-white">Lena Z.</strong><div class="text-xs text-[#B58D5F]">design enthusiast</div></div></div></div>
+        <div class="testimonial-card shadow-lg"><div class="flex gap-1 mb-3"><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i></div><p class="text-[#2E4057] dark:text-[#B58D5F] leading-relaxed">"The team transformed our dated living room into a sophisticated space. The color consultation was invaluable."</p><div class="flex items-center gap-3 mt-4"><img class="w-12 h-12 rounded-full object-cover shadow-sm border border-luxury-border/30 dark:border-luxury-dark-border/30" src="assets/client_amanda.jpg" alt="Amanda K."><div><strong class="text-[#1E1E20] dark:text-white">Amanda K.</strong><div class="text-xs text-[#B58D5F]">homeowner</div></div></div></div>
+        <div class="testimonial-card shadow-lg"><div class="flex gap-1 mb-3"><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i></div><p class="text-[#2E4057] dark:text-[#B58D5F] leading-relaxed">"Our office looks stunning with the new wall finishes. Professional, timely, and incredibly clean work."</p><div class="flex items-center gap-3 mt-4"><img class="w-12 h-12 rounded-full object-cover shadow-sm border border-luxury-border/30 dark:border-luxury-dark-border/30" src="assets/client_marcus.jpg" alt="Marcus R."><div><strong class="text-[#1E1E20] dark:text-white">Marcus R.</strong><div class="text-xs text-[#B58D5F]">business owner</div></div></div></div>
+        <div class="testimonial-card shadow-lg"><div class="flex gap-1 mb-3"><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i><i class="fas fa-star text-[#D4A373]"></i></div><p class="text-[#2E4057] dark:text-[#B58D5F] leading-relaxed">"We love the Venetian plaster finish in our entryway. It feels like a gallery wall. Highly recommend!"</p><div class="flex items-center gap-3 mt-4"><img class="w-12 h-12 rounded-full object-cover shadow-sm border border-luxury-border/30 dark:border-luxury-dark-border/30" src="assets/client_lena.jpg" alt="Lena Z."><div><strong class="text-[#1E1E20] dark:text-white">Lena Z.</strong><div class="text-xs text-[#B58D5F]">design enthusiast</div></div></div></div>
       </div>
     </div>
   </section>
@@ -877,6 +1262,60 @@
       const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
       if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
       if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', handleLogout);
+
+      // Before & After Sliders Interactive Logic
+      function initComparisonSliders() {
+        const sliders = document.querySelectorAll('.ba-slider');
+        sliders.forEach(slider => {
+          const overlay = slider.querySelector('.ba-overlay');
+          const handle = slider.querySelector('.ba-handle');
+          if (!overlay || !handle) return;
+          
+          let isDragging = false;
+          
+          function setSliderPosition(clientX) {
+            const rect = slider.getBoundingClientRect();
+            let position = ((clientX - rect.left) / rect.width) * 100;
+            if (position < 0) position = 0;
+            if (position > 100) position = 100;
+            
+            overlay.style.width = `${position}%`;
+            handle.style.left = `${position}%`;
+          }
+          
+          // Mouse events
+          slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            setSliderPosition(e.clientX);
+          });
+          
+          window.addEventListener('mouseup', () => {
+            isDragging = false;
+          });
+          
+          window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            setSliderPosition(e.clientX);
+          });
+          
+          // Touch events
+          slider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            setSliderPosition(e.touches[0].clientX);
+          });
+          
+          window.addEventListener('touchend', () => {
+            isDragging = false;
+          });
+          
+          window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            setSliderPosition(e.touches[0].clientX);
+          });
+        });
+      }
+      
+      initComparisonSliders();
 
       // Paint Estimator Logic
       calculateProject();
